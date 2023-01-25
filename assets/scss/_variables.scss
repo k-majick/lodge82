@@ -1,0 +1,35 @@
+@import "../../node_modules/modern-normalize/modern-normalize.css";
+@import "@/assets/scss/_fonts.scss";
+
+$color-black: #000;
+$color-blackish: #222;
+$color-white: #fff;
+$color-green: #00ff00;
+$color-green-dark: #0f2200;
+$color-silver: #ccc;
+$color-silver-lite: #eee;
+$color-red: #c10000;
+$color-satan: #666;
+$color-gray: #999;
+
+$breakpoint_laptop_large: 1620px;
+$breakpoint_laptop_medium: 1440px;
+$breakpoint_laptop_small: 1366px;
+$breakpoint_tablet: 1200px;
+$breakpoint_tablet_middle: 1080px;
+$breakpoint_tablet_small: 992px;
+$breakpoint_mobile: 768px;
+$breakpoint_mobile-middle: 670px;
+$breakpoint_mobile_small: 480px;
+
+$breakpoints: (
+  l: $breakpoint_laptop_large,
+  l-m: $breakpoint_laptop_medium,
+  l-s: $breakpoint_laptop_small,
+  t: $breakpoint_tablet,
+  t-m: $breakpoint_tablet_middle,
+  t-s: $breakpoint_tablet_small,
+  m: $breakpoint_mobile,
+  m-m: $breakpoint_mobile-middle,
+  m-s: $breakpoint_mobile_small,
+);

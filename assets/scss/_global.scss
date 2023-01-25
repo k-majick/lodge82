@@ -1,0 +1,41 @@
+@import "@/node_modules/include-media/dist/_include-media.scss";
+
+body,
+html {
+  height: 100%;
+}
+
+body {
+  background-color: $color-black;
+  color: $color-silver-lite;
+  font-family: $font-stack;
+  font-size: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  &.locked {
+    .header {
+      display: none;
+    }
+  }
+
+  @include media("<=m") {
+    font-size: 90%;
+  }
+}
+
+:root {
+  --scroll: -100%;
+}
