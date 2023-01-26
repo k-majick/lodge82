@@ -1,19 +1,19 @@
-import serverless from 'serverless-http';
-import express from 'express';
-import session from 'express-session';
-import bodyParser from 'body-parser';
-import path from 'path';
+import serverless from "serverless-http";
+import express from "express";
+import session from "express-session";
+import bodyParser from "body-parser";
+import path from "path";
 // import http from 'http';
-import cors from 'cors';
+import cors from "cors";
 // import passport from 'passport';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 // import { Server } from 'socket.io';
 // import { fileURLToPath } from 'url';
 // import { passportConfig } from '@/config/passport.js';
 import { router } from "./routes/routes.js";
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== "production") {
   dotenv.config();
 }
 
@@ -28,20 +28,28 @@ mongoose
 
 // Settings
 app.use(cors());
-app.options('/*', (_, res) => res.sendStatus(200));
-app.use(function(_, res, next) {
+app.options("/*", (_, res) => res.sendStatus(200));
+app.use(function (_, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Authorization, Accept");
-  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, HEAD, OPTIONS");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Authorization, Accept"
+  );
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, PUT, POST, DELETE, HEAD, OPTIONS"
+  );
   res.header("Access-Control-Allow-Credentials", "true");
   next();
 });
-app.use(session({
-  resave: false,
-  saveUninitialized: true,
-  secret: process.env.SECRET as string,
-}));
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: true,
+    secret: process.env.SECRET as string,
+  })
+);
+app.use(express.static(path.join(__dirname, "public")));
 
 // Middleware
 app.use(bodyParser.json());
@@ -51,8 +59,10 @@ app.listen(port, () => console.log(`Server running on port ${port}`));
 
 // Routes
 app.use("/.netlify/functions/users", router); // path must route to lambda
-app.get('/', (_, res) => res.send('Invalid endpoint'));
-app.get('*', (_, res) => res.sendFile(path.join(__dirname, 'public/index.html')));
+app.get("/", (_, res) => res.send("Invalid endpoint"));
+app.get("*", (_, res) =>
+  res.sendFile(path.join(__dirname, "public/index.html"))
+);
 
 module.exports = app;
 module.exports.handler = serverless(app);

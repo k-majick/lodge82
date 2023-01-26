@@ -3,5 +3,10 @@
     &.active {
       color: yellow;
     }
+
+    &[aria-disabled="true"] {
+      cursor: not-allowed;
+      pointer-events: none;
+    }
   }
 }

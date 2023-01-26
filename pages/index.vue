@@ -6,6 +6,8 @@
       <router-view></router-view>
     </transition>
   </main>
+
+  <FlashMessage />
 </template>
 
 <script lang="ts" setup>
