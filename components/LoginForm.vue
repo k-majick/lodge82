@@ -9,7 +9,7 @@
       <input v-model="userPassword" class="form-control" type="password" />
     </div>
     <div class="form__group form__group--button">
-      <button type="submit" ref="submitBtn">Log in</button>
+      <button ref="submitBtn" type="submit">Log in</button>
     </div>
   </form>
 </template>
@@ -26,7 +26,7 @@ const authStore = useAuthStore();
 
 const userName = ref("");
 const userPassword = ref("");
-const submitBtn: Ref<any> = ref<HTMLInputElement | undefined>()
+const submitBtn: Ref<any> = ref<HTMLInputElement | undefined>();
 
 const sendForm = async () => {
   submitBtn.value.disabled = true;
@@ -39,12 +39,12 @@ const sendForm = async () => {
   const res = await authStore.authenticateUser(user);
 
   uiStore.showFlashMessage(res.msg);
-  
+
   if (res.success) {
     router.push("/");
   } else {
     resetForm();
-    setTimeout(() => submitBtn.value.disabled = false, 1000);
+    setTimeout(() => (submitBtn.value.disabled = false), 1000);
   }
 };
 

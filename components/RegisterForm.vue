@@ -120,7 +120,7 @@ const rules = {
   },
   password: {
     required: helpers.withMessage("Password required", required),
-    minLength: helpers.withMessage(() => "Enter min. 8 chars", minLength(8)),
+    minLength: helpers.withMessage(() => "Enter min. 3 chars", minLength(3)),
     maxLength: helpers.withMessage(() => "Enter max. 20 chars", maxLength(20)),
   },
 };
@@ -151,22 +151,11 @@ const sendForm = async () => {
   const res = await authStore.registerUser(user);
 
   uiStore.showFlashMessage(res.msg);
-  
+
   if (res.success) {
     router.push("/login");
-  } else {    
-    setTimeout(() => submitBtn.value.disabled = false, 1000);
-    resetForm();
-  }
-};
-
-const resetForm = () => {
-  v$.value.$reset()
-  state.value = {
-    name: "",
-    username: "",
-    email: "",
-    password: "",
+  } else {
+    setTimeout(() => (submitBtn.value.disabled = false), 1000);
   }
 };
 

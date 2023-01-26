@@ -6,25 +6,45 @@ import { User } from "../models/user.js";
 export const router = express.Router();
 
 router.post("/register", (req, res, _) => {
-  let newUser = new User({
+  const newUser = new User({
     name: req.body.name,
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,
   });
 
-  User.addUser(newUser, (err, user) => {
-    if (err) {
-      res.json({
+  User.getUserByEmail(req.body.email, (err, user) => {
+    if (err) throw err;
+    if (user) {
+      return res.json({
         success: false,
-        msg: "Failed to register new user",
-      });
-    } else {
-      res.json({
-        success: true,
-        msg: "User registered",
+        msg: "E-mail exists",
       });
     }
+
+    User.getUserByUsername(req.body.username, (err, user) => {
+      if (err) throw err;
+      if (user) {
+        return res.json({
+          success: false,
+          msg: "User exists",
+        });
+      }
+
+      User.addUser(newUser, (err, user) => {
+        if (err) {
+          res.json({
+            success: false,
+            msg: "Failed to register new user",
+          });
+        } else {
+          res.json({
+            success: true,
+            msg: "User registered",
+          });
+        }
+      });
+    });
   });
 });
 
@@ -75,7 +95,6 @@ router.post("/authenticate", (req, res, _) => {
   });
 });
 
-// Profile
 router.get(
   "/profile",
   passport.authenticate("jwt", {
