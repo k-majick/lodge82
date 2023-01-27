@@ -12,11 +12,26 @@
 </template>
 
 <script lang="ts" setup>
+const route = useRoute();
+const router = useRouter();
+
 const isNavOpen = false;
 const isNavMini = false;
+
+const gotoStart = () => {
+  if (route.path === "/") {
+    router.push("/start");
+  }
+};
+
+gotoStart();
+
+watch(
+  () => route.path,
+  () => gotoStart(),
+);
 </script>
 
 <style lang="scss" scoped>
 @import "./assets/scss/components/_main";
 </style>
-

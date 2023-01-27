@@ -1,5 +1,5 @@
 <template>
-  <nav class="nav nav--main" :class="{ 'open': isNavOpen, 'mini': isNavMini }">
+  <nav class="nav nav--main" :class="{ open: isNavOpen, mini: isNavMini }">
     <button class="nav__control material-icons" @click="toggleNavOpen">
       <span v-if="isNavOpen" class="material-icons">menu_open</span>
       <span v-else class="material-icons">menu</span>
@@ -10,25 +10,38 @@
     </button>
     <ul class="nav__items">
       <li class="nav__item">
-        <nuxt-link
-          :aria-disabled="isLogged ? true : false"
-          to="/login"
-          class="nav__link material-icons"
-        >
-          account_circle
-        </nuxt-link>
-      </li>
-      <li class="nav__item">
-        <nuxt-link
-          :aria-disabled="isLogged ? true : false"
-          to="/register"
-          class="nav__link material-icons"
-        >
-          assignment_turned_in
-        </nuxt-link>
-      </li>
-      <li v-if="isLogged" class="nav__item">
-        <button class="nav__link material-icons" @click="logout">logout</button>
+        <button class="nav__btn">
+          <span class="nav__icon material-icons">account_circle</span>
+        </button>
+        <ul class="nav__submenu">
+          <li v-if="!isLogged ? true : false" class="nav__item">
+            <nuxt-link to="/login" class="nav__link">
+              <span class="nav__icon material-icons">login</span>
+              <span class="nav__text">Login</span>
+            </nuxt-link>
+          </li>
+          <li v-if="!isLogged ? true : false" class="nav__item">
+            <nuxt-link to="/register" class="nav__link">
+              <span class="nav__icon material-icons">assignment_turned_in</span>
+              <span class="nav__text">Register</span>
+            </nuxt-link>
+          </li>
+          <li v-if="isLogged ? true : false" class="nav__item">
+            <nuxt-link to="/account" class="nav__link">
+              <span class="nav__icon material-icons">assignment</span>
+              <span class="nav__text">Account</span>
+            </nuxt-link>
+          </li>
+          <li v-if="isLogged ? true : false" class="nav__item">
+            <button class="nav__link" @click="logout">
+              <span class="nav__icon material-icons">logout</span>
+              <span class="nav__text">Logout</span>
+            </button>
+          </li>
+        </ul>
+        <span v-if="isLogged" class="nav__item--status material-icons">
+          check
+        </span>
       </li>
     </ul>
   </nav>
@@ -60,12 +73,12 @@ watch(
 
 watch(
   () => uiStore.isNavOpen,
-  () => isNavOpen.value = uiStore.isNavOpen,
+  () => (isNavOpen.value = uiStore.isNavOpen),
 );
 
 watch(
   () => uiStore.isNavMini,
-  () => isNavMini.value = uiStore.isNavMini,
+  () => (isNavMini.value = uiStore.isNavMini),
 );
 </script>
 

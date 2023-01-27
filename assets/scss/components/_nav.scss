@@ -1,6 +1,6 @@
 .nav {
   $self: &;
-  background-color: transparentize($color-silver, 0.75);
+  background-color: transparentize($color-black, 0.75);
 
   &__items {
     display: flex;
@@ -8,10 +8,39 @@
     margin: 0;
     list-style: none;
   }
-  
-  &__link {
-    &.active {
-      color: yellow;
+
+  &__item {
+    position: relative;
+    &--status {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      background-color: $color-black;
+      border-radius: 15px;
+      font-size: 75%;
+      color: $color-yellow;
+      right: 5px;
+      bottom: 5px;
+      width: 15px;
+      height: 15px;
+      z-index: 1;
+    }
+  }
+
+  &__link,
+  &__btn {
+    display: flex;
+    align-items: center;
+    background: none;
+    cursor: pointer;
+    color: $color-silver-lite;
+    border: 0;
+
+    &.active,
+    &:hover {
+      color: $color-yellow;
     }
 
     &[aria-disabled="true"] {
@@ -22,11 +51,9 @@
 
   &__control {
     @include btn;
-    position: relative;
-    z-index: 1;
-    padding: 0;
+    color: $color-silver-lite;
 
-    @include media('>m') {
+    @include media(">m") {
       & + & {
         margin-left: 10px;
       }
@@ -44,30 +71,76 @@
     display: flex;
     align-items: center;
     padding: 5px;
-    @include media('<=m') {
+    @include media("<=m") {
       padding: 0;
       height: 50px;
     }
-    @include media('>=l-s') {
-      // position: relative;
-      // z-index: auto;
+    @include media(">=l-s") {
       padding: 5px 15px;
-    }
-
-    &.open {
-      @include media('>=l-s') {
-        margin-left: 270px;
-      }
-    }
-
-    &.open.mini {
-      @include media('>=l-s') {
-        margin-left: 60px;
-      }
     }
 
     #{$self}__items {
       margin-left: auto;
+    }
+
+    #{$self}__item {
+      position: relative;
+      &:hover {
+        #{$self}__btn + #{$self}__submenu {
+          display: flex;
+        }
+      }
+    }
+
+    #{$self}__btn {
+      @include btn;
+      position: relative;
+      z-index: 1;
+      padding: 0;
+    }
+
+    #{$self}__icon {
+      font-size: 1.75rem;
+    }
+
+    #{$self}__submenu {
+      @include bshadow;
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      flex-flow: column;
+      list-style: none;
+      padding: 2.5px 0;
+      background-color: $color-black;
+      border-radius: 3px;
+
+      #{$self}__link {
+        padding: 7.5px 12.5px 7.5px 7.5px;
+      }
+
+      #{$self}__icon {
+        margin-right: 10px;
+        font-size: 1.25rem;
+      }
+
+      #{$self}__text {
+        font-size: 90%;
+      }
+    }
+
+    &.open {
+      @include media(">=l-s") {
+        margin-left: 270px;
+        padding-left: 5px;
+      }
+    }
+
+    &.open.mini {
+      @include media(">=l-s") {
+        margin-left: 60px;
+        padding-left: 5px;
+      }
     }
   }
 
@@ -87,14 +160,44 @@
     justify-content: center;
     overflow: hidden;
 
+    #{$self}__items {
+      width: 100%;
+    }
+
+    #{$self}__item {
+      min-width: 100%;
+      display: flex;
+    }
+
+    #{$self}__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      width: 60px;
+      @include media("<=m") {
+        width: 50px;
+      }
+    }
+
     &.open {
       transform: translateX(0%);
     }
 
     &.mini {
       max-width: 60px;
-      @include media('<=m') {
+      @include media("<=m") {
         max-width: 50px;
+      }
+
+      #{$self}__text {
+        display: none;
+      }
+    }
+
+    &:not(.mini) {
+      #{$self}__items {
+        justify-content: flex-start;
       }
     }
   }

@@ -1,8 +1,11 @@
 <template>
-  <nav class="nav nav--side" :class="{ 'open': isNavOpen, 'mini': isNavMini }">
+  <nav class="nav nav--side" :class="{ open: isNavOpen, mini: isNavMini }">
     <ul class="nav__items">
       <li class="nav__item">
-        <nuxt-link to="/" class="nav__link material-icons">home</nuxt-link>
+        <nuxt-link to="/start" class="nav__link">
+          <span class="nav__icon material-icons">home</span>
+          <span class="nav__text">Start</span>
+        </nuxt-link>
       </li>
     </ul>
   </nav>
@@ -18,12 +21,12 @@ const isNavMini = ref(uiStore.isNavMini);
 
 watch(
   () => uiStore.isNavOpen,
-  () => isNavOpen.value = uiStore.isNavOpen,
+  () => (isNavOpen.value = uiStore.isNavOpen),
 );
 
 watch(
   () => uiStore.isNavMini,
-  () => isNavMini.value = uiStore.isNavMini,
+  () => (isNavMini.value = uiStore.isNavMini),
 );
 </script>
 

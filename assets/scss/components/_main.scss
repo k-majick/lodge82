@@ -1,3 +1,7 @@
 .main {
   @include mk-container;
+
+  min-height: 100vh;
+  padding-top: 100px;
+  padding-bottom: 15px;
 }
