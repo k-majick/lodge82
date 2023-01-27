@@ -1,5 +1,6 @@
 <template>
   <NavMain />
+  <NavSide />
 
   <main class="main" :class="{ open: isNavOpen, mini: isNavMini }">
     <transition name="fade">
@@ -14,3 +15,8 @@
 const isNavOpen = false;
 const isNavMini = false;
 </script>
+
+<style lang="scss" scoped>
+@import "./assets/scss/components/_main";
+</style>
+

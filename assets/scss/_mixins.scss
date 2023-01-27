@@ -1,0 +1,48 @@
+/* responsiveness */
+@mixin mk-container() {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+  @include media('<=m') {
+    max-width: 480px;
+  }
+  @include media('>m', '<=l-s') {
+    max-width: 970px;
+  }
+  @include media('>=l-s') {
+    max-width: 1080px;
+  }
+}
+/* effects */
+@mixin trans($time, $prop: "") {
+  @if $prop != "" {
+    transition: $prop #{$time}s;
+  } @else {
+    transition: all #{$time}s;
+  }
+}
+/* elements */
+@mixin img {
+  width: 100%;
+  height: auto;
+}
+@mixin btn {
+  @include trans(0.25);
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  color: $color-white;
+  height: 50px;
+  min-width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+
+  &:focus {
+    outline: 0;
+  }
+}

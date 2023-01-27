@@ -1,4 +1,14 @@
 .nav {
+  $self: &;
+  background-color: transparentize($color-silver, 0.75);
+
+  &__items {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  
   &__link {
     &.active {
       color: yellow;
@@ -7,6 +17,85 @@
     &[aria-disabled="true"] {
       cursor: not-allowed;
       pointer-events: none;
+    }
+  }
+
+  &__control {
+    @include btn;
+    position: relative;
+    z-index: 1;
+    padding: 0;
+
+    @include media('>m') {
+      & + & {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  &--main {
+    @include trans(0.25);
+    position: fixed;
+    z-index: 99;
+    right: 0;
+    top: 0;
+    left: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    @include media('<=m') {
+      padding: 0;
+      height: 50px;
+    }
+    @include media('>=l-s') {
+      // position: relative;
+      // z-index: auto;
+      padding: 5px 15px;
+    }
+
+    &.open {
+      @include media('>=l-s') {
+        margin-left: 270px;
+      }
+    }
+
+    &.open.mini {
+      @include media('>=l-s') {
+        margin-left: 60px;
+      }
+    }
+
+    #{$self}__items {
+      margin-left: auto;
+    }
+  }
+
+  &--side {
+    @include trans(0.25);
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    max-width: 270px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    &.open {
+      transform: translateX(0%);
+    }
+
+    &.mini {
+      max-width: 60px;
+      @include media('<=m') {
+        max-width: 50px;
+      }
     }
   }
 }
