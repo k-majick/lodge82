@@ -62,6 +62,24 @@ export const useAuthStore = defineStore({
       }
     },
 
+    async getProfile() {
+      try {
+        const res = fetch("/.netlify/functions/users/profile", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": this.token as string,
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => data.user);
+
+        return res;
+      } catch (e) {
+        console.error(e);
+      }
+    },
+
     setUser(token: string | null, user: User | null) {
       this.token = token;
       this.user = user;
