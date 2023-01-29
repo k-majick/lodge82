@@ -1,12 +1,12 @@
 <template>
   <nav class="nav nav--main" :class="{ open: isNavOpen, mini: isNavMini }">
-    <button class="nav__control material-icons" @click="toggleNavOpen">
-      <span v-if="isNavOpen" class="material-icons">menu_open</span>
-      <span v-else class="material-icons">menu</span>
+    <button class="nav__btn material-icons" @click="toggleNavOpen">
+      <span v-if="isNavOpen" class="nav__icon material-icons">menu_open</span>
+      <span v-else class="nav__icon material-icons">menu</span>
     </button>
-    <button class="nav__control material-icons" @click="toggleNavMini">
-      <span v-if="isNavMini" class="material-icons">chevron_right</span>
-      <span v-else class="material-icons">chevron_left</span>
+    <button class="nav__btn material-icons" @click="toggleNavMini">
+      <span v-if="isNavMini" class="nav__icon material-icons">chevron_right</span>
+      <span v-else class="nav__icon material-icons">chevron_left</span>
     </button>
     <ul class="nav__items">
       <li class="nav__item">

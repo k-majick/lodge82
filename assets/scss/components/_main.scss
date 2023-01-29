@@ -1,7 +1,18 @@
 .main {
+  $self: &;
   @include mk-container;
 
   min-height: 100vh;
   padding-top: 100px;
   padding-bottom: 15px;
+
+  &__btn {
+    @include btn;
+  }
+
+  &__title {
+    color: $color-yellow;
+    font-family: $font-secondary;
+    font-size: 1.75rem;
+  }
 }

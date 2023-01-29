@@ -17,6 +17,10 @@ export default defineNuxtConfig({
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=Nunito:wght@200;400&display=swap",
         },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Fjalla+One:wght@200;400&display=swap",
+        },
       ],
     },
   },

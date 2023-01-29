@@ -8,8 +8,8 @@
       class="form__group form__group--text"
       :class="{ 'form__group--error': v$.name.$errors.length }"
     >
-      <label>Display name</label>
-      <input v-model="v$.name.$model" class="form-control" type="text" />
+      <label class="form__label">Display name</label>
+      <input v-model="v$.name.$model" class="form__input" type="text" />
       <span
         v-for="error of v$.name.$errors"
         :key="error.$uid"
@@ -21,8 +21,8 @@
       class="form__group form__group--text"
       :class="{ 'form__group--error': v$.username.$errors.length }"
     >
-      <label>Username</label>
-      <input v-model="v$.username.$model" class="form-control" type="text" />
+      <label class="form__label">Username</label>
+      <input v-model="v$.username.$model" class="form__input" type="text" />
       <span
         v-for="error of v$.username.$errors"
         :key="error.$uid"
@@ -34,8 +34,8 @@
       class="form__group form__group--text"
       :class="{ 'form__group--error': v$.email.$errors.length }"
     >
-      <label>E-mail</label>
-      <input v-model="v$.email.$model" class="form-control" type="email" />
+      <label class="form__label">E-mail</label>
+      <input v-model="v$.email.$model" class="form__input" type="email" />
       <span
         v-for="error of v$.email.$errors"
         :key="error.$uid"
@@ -47,10 +47,10 @@
       class="form__group form__group--text"
       :class="{ 'form__group--error': v$.password.$errors.length }"
     >
-      <label>Password</label>
+      <label class="form__label">Password</label>
       <input
         v-model="v$.password.$model"
-        class="form-control"
+        class="form__input"
         type="password"
       />
       <span
@@ -61,7 +61,7 @@
       >
     </div>
     <div class="form__group form__group--button">
-      <button ref="submitBtn" type="submit" @click="sendForm">Register</button>
+      <button ref="submitBtn" type="submit" class="main__btn" @click="sendForm">Register</button>
     </div>
   </form>
 </template>
@@ -155,7 +155,7 @@ const sendForm = async () => {
   if (res.success) {
     router.push("/login");
   } else {
-    setTimeout(() => (submitBtn.value.disabled = false), 1000);
+    setTimeout(() => (submitBtn.value.disabled = false), 5000);
   }
 };
 

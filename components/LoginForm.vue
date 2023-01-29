@@ -1,15 +1,15 @@
 <template>
   <form class="form form--login" @submit.prevent="sendForm">
     <div class="form__group form__group--text">
-      <label>Username</label>
-      <input v-model="userName" class="form-control" type="text" />
+      <label class="form__label">Username</label>
+      <input v-model="userName" class="form__input" type="text" />
     </div>
     <div class="form__group form__group--text">
-      <label>Password</label>
-      <input v-model="userPassword" class="form-control" type="password" />
+      <label class="form__label">Password</label>
+      <input v-model="userPassword" class="form__input" type="password" />
     </div>
     <div class="form__group form__group--button">
-      <button ref="submitBtn" type="submit">Log in</button>
+      <button ref="submitBtn" type="submit" class="main__btn">Log in</button>
     </div>
   </form>
 </template>
@@ -44,7 +44,7 @@ const sendForm = async () => {
     router.push("/");
   } else {
     resetForm();
-    setTimeout(() => (submitBtn.value.disabled = false), 1000);
+    setTimeout(() => (submitBtn.value.disabled = false), 5000);
   }
 };
 

@@ -29,14 +29,26 @@
     }
   }
 
+  &__btn {
+    #{$self}__icon {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @include media(">m") {
+      & + & {
+        margin-left: 10px;
+      }
+    }
+  }
+
   &__link,
   &__btn {
-    display: flex;
-    align-items: center;
-    background: none;
-    cursor: pointer;
+    @include btn-base;
     color: $color-silver-lite;
-    border: 0;
 
     &.active,
     &:hover {
@@ -46,17 +58,6 @@
     &[aria-disabled="true"] {
       cursor: not-allowed;
       pointer-events: none;
-    }
-  }
-
-  &__control {
-    @include btn;
-    color: $color-silver-lite;
-
-    @include media(">m") {
-      & + & {
-        margin-left: 10px;
-      }
     }
   }
 
@@ -93,10 +94,8 @@
     }
 
     #{$self}__btn {
-      @include btn;
       position: relative;
       z-index: 1;
-      padding: 0;
     }
 
     #{$self}__icon {

@@ -17,7 +17,7 @@
   }
 }
 /* effects */
-@mixin trans($time, $prop: "") {
+@mixin trans($time: 0.25, $prop: "") {
   @if $prop != "" {
     transition: $prop #{$time}s;
   } @else {
@@ -32,13 +32,11 @@
   width: 100%;
   height: auto;
 }
-@mixin btn {
+@mixin btn-base {
   @include trans(0.25);
   cursor: pointer;
   background: transparent;
   border: 0;
-  height: 50px;
-  min-width: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,5 +45,24 @@
 
   &:focus {
     outline: 0;
+  }
+}
+@mixin btn {
+  @include btn-base;
+  color: $color-silver-lite;
+  height: 40px;
+  min-width: 50px;
+  border: 1px solid $color-silver-lite;
+  border-radius: 6px;
+  padding: 0 15px;
+
+  &:active,
+  &:hover {
+    box-shadow: 0 0 10px $color-silver-lite;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    box-shadow: none;
   }
 }
