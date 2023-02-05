@@ -2,11 +2,13 @@
   <NavMain />
   <NavSide />
 
-  <main class="main" :class="{ open: isNavOpen, mini: isNavMini }">
-    <transition name="fade">
-      <router-view></router-view>
+  <router-view v-slot="{ Component, route }">
+    <transition name="fade" mode="out-in">
+      <main class="main" :class="{ open: isNavOpen, mini: isNavMini }">
+        <component :is="Component" :key="(route.name as string)" />
+      </main>
     </transition>
-  </main>
+  </router-view>
 
   <FlashMessage />
 </template>

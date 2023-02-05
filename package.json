@@ -1,5 +1,8 @@
 {
   "private": true,
+  "author": {
+    "name": "k-majick"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --port 3000",
