@@ -1,15 +1,15 @@
 <template>
   <form class="form form--login" @submit.prevent="sendForm">
     <div class="form__group form__group--text">
-      <label class="form__label">Username</label>
+      <label class="form__label">{{ $t('form.username') }}</label>
       <input v-model="userName" class="form__input" type="text" />
     </div>
     <div class="form__group form__group--text">
-      <label class="form__label">Password</label>
+      <label class="form__label">{{ $t('form.password') }}</label>
       <input v-model="userPassword" class="form__input" type="password" />
     </div>
     <div class="form__group form__group--button">
-      <button ref="submitBtn" type="submit" class="main__btn">Log in</button>
+      <button ref="submitBtn" type="submit" class="main__btn">{{ $t('form.loginAction') }}</button>
     </div>
   </form>
 </template>

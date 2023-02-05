@@ -1,0 +1,44 @@
+{
+  "pages": {
+    "start": {
+      "title": "Start",
+      "slug": "start"
+    },
+    "login": {
+      "title": "Login",
+      "slug": "login"
+    },
+    "logout": {
+      "title": "Logout",
+      "slug": "logout"
+    },
+    "account": {
+      "title": "Account",
+      "slug": "account"
+    },
+    "register": {
+      "title": "Register",
+      "slug": "register"
+    }
+  },
+  "form": {
+    "name": "Display name",
+    "username": "User name",
+    "email": "E-mail",
+    "password": "Password",
+    "loginAction": "Login",
+    "registerAction": "Register"
+  },
+  "validation": {
+    "nameRequired": "Please enter your name",
+    "nameMin": "Name should contain at least 3 letters",
+    "nameMax": "Name can't exceed 30 letters",
+    "nameFormat": "Name may contain letters only",
+    "emailRequired": "Please enter your e-mail address",
+    "emailMax": "E-mail can't exceed 50 characters",
+    "emailInvalid": "Invalid e-mail address",
+    "messageRequired": "Please enter your message",
+    "messageMin": "Message is too short",
+    "messageMax": "Message can't exceed 1000 characters"
+  }
+}

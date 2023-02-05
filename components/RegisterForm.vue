@@ -8,7 +8,7 @@
       class="form__group form__group--text"
       :class="{ 'form__group--error': v$.name.$errors.length }"
     >
-      <label class="form__label">Display name</label>
+      <label class="form__label">{{ $t('form.name') }}</label>
       <input v-model="v$.name.$model" class="form__input" type="text" />
       <span
         v-for="error of v$.name.$errors"
@@ -21,7 +21,7 @@
       class="form__group form__group--text"
       :class="{ 'form__group--error': v$.username.$errors.length }"
     >
-      <label class="form__label">Username</label>
+      <label class="form__label">{{ $t('form.username') }}</label>
       <input v-model="v$.username.$model" class="form__input" type="text" />
       <span
         v-for="error of v$.username.$errors"
@@ -34,7 +34,7 @@
       class="form__group form__group--text"
       :class="{ 'form__group--error': v$.email.$errors.length }"
     >
-      <label class="form__label">E-mail</label>
+      <label class="form__label">{{ $t('form.email') }}</label>
       <input v-model="v$.email.$model" class="form__input" type="email" />
       <span
         v-for="error of v$.email.$errors"
@@ -47,7 +47,7 @@
       class="form__group form__group--text"
       :class="{ 'form__group--error': v$.password.$errors.length }"
     >
-      <label class="form__label">Password</label>
+      <label class="form__label">{{ $t('form.password') }}</label>
       <input
         v-model="v$.password.$model"
         class="form__input"
@@ -61,7 +61,7 @@
       >
     </div>
     <div class="form__group form__group--button">
-      <button ref="submitBtn" type="submit" class="main__btn" @click="sendForm">Register</button>
+      <button ref="submitBtn" type="submit" class="main__btn" @click="sendForm">{{ $t('form.registerAction') }}</button>
     </div>
   </form>
 </template>

@@ -4,7 +4,7 @@
       <li class="nav__item">
         <nuxt-link to="/start" class="nav__link">
           <span class="nav__icon material-icons">home</span>
-          <span class="nav__text">Start</span>
+          <span class="nav__text">{{ $t('pages.start.title') }}</span>
         </nuxt-link>
       </li>
     </ul>

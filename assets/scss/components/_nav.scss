@@ -36,6 +36,17 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
+      &--text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: $color-teal;
+        text-transform: uppercase;
+        font-size: 80%;
+        font-weight: bold;
+      }
     }
 
     @include media(">m") {
@@ -125,6 +136,12 @@
 
       #{$self}__text {
         font-size: 90%;
+      }
+
+      &--locales {
+        #{$self}__item {
+          text-transform: uppercase;
+        }
       }
     }
 
