@@ -2,7 +2,7 @@
   <NavMain />
   <NavSide />
 
-  <router-view v-slot="{ Component, route }">
+  <router-view v-slot="{ Component }">
     <transition name="fade" mode="out-in">
       <main class="main" :class="{ open: isNavOpen, mini: isNavMini }">
         <component :is="Component" :key="(route.name as string)" />
