@@ -18,7 +18,7 @@ router.post("/register", (req, res, _) => {
     if (user) {
       return res.json({
         success: false,
-        msg: "E-mail exists",
+        msg: "validation.registerEmailExists",
       });
     }
 
@@ -27,7 +27,7 @@ router.post("/register", (req, res, _) => {
       if (user) {
         return res.json({
           success: false,
-          msg: "User exists",
+          msg: "validation.registerUserExists",
         });
       }
 
@@ -35,12 +35,12 @@ router.post("/register", (req, res, _) => {
         if (err) {
           res.json({
             success: false,
-            msg: "Failed to register new user",
+            msg: "validation.registerFail",
           });
         } else {
           res.json({
             success: true,
-            msg: "User registered",
+            msg: "validation.registerSuccess",
           });
         }
       });
@@ -57,7 +57,7 @@ router.post("/authenticate", (req, res, _) => {
     if (!user) {
       return res.json({
         success: false,
-        msg: "User not found",
+        msg: "validation.loginNotFound",
       });
     }
 
@@ -76,7 +76,7 @@ router.post("/authenticate", (req, res, _) => {
 
         res.json({
           success: true,
-          msg: "You are now logged in",
+          msg: "validation.loginSuccess",
           token: `Bearer ${token}`,
           user: {
             id: user._id,
@@ -88,7 +88,7 @@ router.post("/authenticate", (req, res, _) => {
       } else {
         return res.json({
           success: false,
-          msg: "Wrong password",
+          msg: "validation.loginFail",
         });
       }
     });

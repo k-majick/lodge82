@@ -39,6 +39,13 @@
     "emailInvalid": "Niepoprawny adres email",
     "messageRequired": "Wpisz swoją wiadomość",
     "messageMin": "Wiadomość jest za krótka",
-    "messageMax": "Wiadomość nie może przekraczać 1000 znaków"
+    "messageMax": "Wiadomość nie może przekraczać 1000 znaków",
+    "registerUserExists": "E-mail istnieje",
+    "registerEmailExists": "Użytkownik istnieje",
+    "registerFail": "Nie udało się zarejestrować",
+    "registerSuccess": "Użytkownik zarejestrowany",
+    "loginNotFound": "Użytkownik nie istnieje",
+    "loginSuccess": "Zalogowano",
+    "loginFail": "Niepoprawne password"
   }
 }

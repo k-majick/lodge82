@@ -39,6 +39,13 @@
     "emailInvalid": "Ungültige E-Mail-Adresse",
     "messageRequired": "Bitte geben Sie Ihre Nachricht ein",
     "messageMin": "Nachricht ist zu kurz",
-    "messageMax": "Die Nachricht darf 1000 Zeichen nicht überschreiten"
+    "messageMax": "Die Nachricht darf 1000 Zeichen nicht überschreiten",
+    "registerUserExists": "E-mail existiert",
+    "registerEmailExists": "Benutzer exists",
+    "registerFail": "Neuer Benutzer konnte nicht registriert werden",
+    "registerSuccess": "Benutzer registriert",
+    "loginNotFound": "Benutzer nicht gefunden",
+    "loginSuccess": "Sie sind jetzt eingeloggt",
+    "loginFail": "Falsches Passwort"
   }
 }

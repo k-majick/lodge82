@@ -39,6 +39,13 @@
     "emailInvalid": "Invalid e-mail address",
     "messageRequired": "Please enter your message",
     "messageMin": "Message is too short",
-    "messageMax": "Message can't exceed 1000 characters"
+    "messageMax": "Message can't exceed 1000 characters",
+    "registerUserExists": "E-mail exists",
+    "registerEmailExists": "User exists",
+    "registerFail": "Failed to register new user",
+    "registerSuccess": "User registered",
+    "loginNotFound": "User not found",
+    "loginSuccess": "You are now logged in",
+    "loginFail": "Wrong password"
   }
 }

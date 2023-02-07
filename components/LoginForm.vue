@@ -17,12 +17,14 @@
 <script lang="ts" setup>
 import type { Ref } from "vue";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 import { useUiStore } from "@/store/ui";
 import { useAuthStore } from "@/store/auth";
 
 const router = useRouter();
 const uiStore = useUiStore();
 const authStore = useAuthStore();
+const { t } = useI18n();
 
 const userName = ref("");
 const userPassword = ref("");
@@ -38,7 +40,7 @@ const sendForm = async () => {
 
   const res = await authStore.authenticateUser(user);
 
-  uiStore.showFlashMessage(res.msg);
+  uiStore.showFlashMessage(t(res.msg));
 
   if (res.success) {
     router.push("/");

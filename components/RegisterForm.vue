@@ -69,6 +69,7 @@
 <script lang="ts" setup>
 import type { Ref } from "vue";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 import { useUiStore } from "@/store/ui";
 import { useAuthStore } from "@/store/auth";
 import useVuelidate from "@vuelidate/core";
@@ -80,9 +81,11 @@ import {
   helpers,
 } from "@vuelidate/validators";
 
+
 const router = useRouter();
 const uiStore = useUiStore();
 const authStore = useAuthStore();
+const { t } = useI18n();
 
 const alphaDiacritic = helpers.regex(/^[a-zA-ZÀ-ž\s]*$/);
 const submitBtn: Ref<any> = ref<HTMLInputElement | undefined>();
@@ -150,7 +153,7 @@ const sendForm = async () => {
 
   const res = await authStore.registerUser(user);
 
-  uiStore.showFlashMessage(res.msg);
+  uiStore.showFlashMessage(t(res.msg));
 
   if (res.success) {
     router.push("/login");
