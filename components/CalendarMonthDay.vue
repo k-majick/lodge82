@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import $dayjs from 'dayjs';
+import $dayjs from "dayjs";
 
 const props = defineProps({
   day: {
@@ -37,5 +37,5 @@ const selectDay = () => {
   console.dir(props); // eslint-disable-line
 };
 
-const label = $dayjs(props.day?.date).format('D');
+const label = $dayjs(props.day?.date).format("D");
 </script>

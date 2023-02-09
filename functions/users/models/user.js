@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
 const UserSchema = mongoose.Schema({
   name: {
@@ -19,7 +19,7 @@ const UserSchema = mongoose.Schema({
   },
 });
 
-export const User = mongoose.model('User', UserSchema);
+export const User = mongoose.model("User", UserSchema);
 
 User.getUserById = (id, callback) => {
   User.findById(id, callback);

@@ -1,11 +1,11 @@
-import express from 'express';
-import passport from 'passport';
-import jwt from 'jsonwebtoken';
-import { User } from '../models/user.js';
+import express from "express";
+import passport from "passport";
+import jwt from "jsonwebtoken";
+import { User } from "../models/user.js";
 
 export const router = express.Router();
 
-router.post('/register', (req, res, _) => {
+router.post("/register", (req, res, _) => {
   const newUser = new User({
     name: req.body.name,
     username: req.body.username,
@@ -18,7 +18,7 @@ router.post('/register', (req, res, _) => {
     if (user) {
       return res.json({
         success: false,
-        msg: 'validation.registerEmailExists',
+        msg: "validation.registerEmailExists",
       });
     }
 
@@ -27,7 +27,7 @@ router.post('/register', (req, res, _) => {
       if (user) {
         return res.json({
           success: false,
-          msg: 'validation.registerUserExists',
+          msg: "validation.registerUserExists",
         });
       }
 
@@ -35,12 +35,12 @@ router.post('/register', (req, res, _) => {
         if (err) {
           res.json({
             success: false,
-            msg: 'validation.registerFail',
+            msg: "validation.registerFail",
           });
         } else {
           res.json({
             success: true,
-            msg: 'validation.registerSuccess',
+            msg: "validation.registerSuccess",
           });
         }
       });
@@ -48,7 +48,7 @@ router.post('/register', (req, res, _) => {
   });
 });
 
-router.post('/authenticate', (req, res, _) => {
+router.post("/authenticate", (req, res, _) => {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -57,7 +57,7 @@ router.post('/authenticate', (req, res, _) => {
     if (!user) {
       return res.json({
         success: false,
-        msg: 'validation.loginNotFound',
+        msg: "validation.loginNotFound",
       });
     }
 
@@ -76,7 +76,7 @@ router.post('/authenticate', (req, res, _) => {
 
         res.json({
           success: true,
-          msg: 'validation.loginSuccess',
+          msg: "validation.loginSuccess",
           token: `Bearer ${token}`,
           user: {
             id: user._id,
@@ -88,7 +88,7 @@ router.post('/authenticate', (req, res, _) => {
       } else {
         return res.json({
           success: false,
-          msg: 'validation.loginFail',
+          msg: "validation.loginFail",
         });
       }
     });
@@ -96,8 +96,8 @@ router.post('/authenticate', (req, res, _) => {
 });
 
 router.get(
-  '/profile',
-  passport.authenticate('jwt', {
+  "/profile",
+  passport.authenticate("jwt", {
     session: true,
   }),
   (req, res, _) => {
