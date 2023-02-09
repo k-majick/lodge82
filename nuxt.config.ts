@@ -1,4 +1,4 @@
-import eslint from "vite-plugin-eslint";
+import eslint from 'vite-plugin-eslint';
 
 export default defineNuxtConfig({
   typescript: {
@@ -10,16 +10,16 @@ export default defineNuxtConfig({
       title: `${process.env.APP_NAME}`,
       link: [
         {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/icon?family=Material+Icons",
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
         },
         {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Nunito:wght@200;400&display=swap",
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Nunito:wght@200;400&display=swap',
         },
         {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Fjalla+One:wght@200;400&display=swap",
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Fjalla+One:wght@200;400&display=swap',
         },
         {
           rel: 'manifest',
@@ -62,11 +62,11 @@ export default defineNuxtConfig({
       ],
     },
   },
-  modules: ["@pinia/nuxt"],
+  modules: ['@pinia/nuxt'],
   router: {
     options: {
-      linkActiveClass: "active",
-      linkExactActiveClass: "active",
+      linkActiveClass: 'active',
+      linkExactActiveClass: 'active',
     },
   },
   runtimeConfig: {
@@ -85,5 +85,5 @@ export default defineNuxtConfig({
       },
     },
   },
-  css: ["@/assets/scss/_global.scss"],
+  css: ['@/assets/scss/_global.scss'],
 });

@@ -1,0 +1,40 @@
+.calendar {
+  $self: &;
+  &__days {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    grid-column-gap: 1px;
+    grid-row-gap: 1px;
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+
+    &--head {
+      height: auto;
+
+      #{$self}__day {
+        padding: 5px 0;
+      }
+    }
+
+    &--main {
+      #{$self}__day {
+        border: 1px solid transparentize($color-white, 0.5);
+        cursor: pointer;
+        position: relative;
+      }
+    }
+  }
+
+  &__day {
+    &--today {
+      background-color: $color-white;
+      color: $color-teal;
+    }
+  }
+}

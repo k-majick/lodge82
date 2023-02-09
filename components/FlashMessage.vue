@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts" setup>
-import { useUiStore } from "@/store/ui";
+import { useUiStore } from '@/store/ui';
 
 const uiStore = useUiStore();
-const message = ref("");
+const message = ref('');
 
 watch(
   () => uiStore.currentFlashMessage,
@@ -17,5 +17,5 @@ watch(
 </script>
 
 <style lang="scss" scoped>
-@import "./assets/scss/components/_flash";
+@import './assets/scss/components/_flash';
 </style>

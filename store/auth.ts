@@ -1,4 +1,4 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 
 interface User {
   id?: string;
@@ -14,7 +14,7 @@ interface IAuthState {
 }
 
 export const useAuthStore = defineStore({
-  id: "auth-store",
+  id: 'auth-store',
   state: (): IAuthState => ({
     user: null,
     token: null,
@@ -22,13 +22,13 @@ export const useAuthStore = defineStore({
   actions: {
     async registerUser(user: User) {
       try {
-        const res = fetch("/.netlify/functions/users/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+        const res = fetch('/.netlify/functions/users/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(user),
         })
-          .then((res) => res.json())
-          .then((data) => {
+          .then(res => res.json())
+          .then(data => {
             if (data.success) {
               this.setUser(data.token, data.user);
             }
@@ -43,13 +43,13 @@ export const useAuthStore = defineStore({
 
     async authenticateUser(user: User) {
       try {
-        const res = fetch("/.netlify/functions/users/authenticate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+        const res = fetch('/.netlify/functions/users/authenticate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(user),
         })
-          .then((res) => res.json())
-          .then((data) => {
+          .then(res => res.json())
+          .then(data => {
             if (data.success) {
               this.setUser(data.token, data.user);
             }
@@ -64,15 +64,15 @@ export const useAuthStore = defineStore({
 
     async getProfile() {
       try {
-        const res = fetch("/.netlify/functions/users/profile", {
-          method: "GET",
+        const res = fetch('/.netlify/functions/users/profile', {
+          method: 'GET',
           headers: {
-            "Content-Type": "application/json",
-            "Authorization": this.token as string,
+            'Content-Type': 'application/json',
+            Authorization: this.token as string,
           },
         })
-          .then((res) => res.json())
-          .then((data) => data.user);
+          .then(res => res.json())
+          .then(data => data.user);
 
         return res;
       } catch (e) {
@@ -86,6 +86,6 @@ export const useAuthStore = defineStore({
     },
   },
   getters: {
-    currentUser: (state) => state.user,
+    currentUser: state => state.user,
   },
 });

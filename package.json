@@ -12,6 +12,7 @@
     "format": "prettier .  --write"
   },
   "devDependencies": {
+    "@nuxtjs/dayjs": "^1.4.1",
     "@pinia/nuxt": "^0.4.6",
     "@types/express": "^4.17.17",
     "@types/express-session": "^1.17.5",

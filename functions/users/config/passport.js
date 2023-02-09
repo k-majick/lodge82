@@ -1,7 +1,7 @@
-import { Strategy, ExtractJwt } from "passport-jwt";
-import { User } from "../models/user.js";
+import { Strategy, ExtractJwt } from 'passport-jwt';
+import { User } from '../models/user.js';
 
-export const passportConfig = (passport) => {
+export const passportConfig = passport => {
   const opts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: process.env.SECRET,
@@ -18,7 +18,7 @@ export const passportConfig = (passport) => {
           return done(null, false);
         }
       });
-    })
+    }),
   );
 
   passport.serializeUser(function (user, done) {

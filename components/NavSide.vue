@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useUiStore } from "@/store/ui";
+import { useUiStore } from '@/store/ui';
 
 const uiStore = useUiStore();
 
@@ -31,5 +31,5 @@ watch(
 </script>
 
 <style lang="scss" scoped>
-@import "./assets/scss/components/_nav";
+@import './assets/scss/components/_nav';
 </style>

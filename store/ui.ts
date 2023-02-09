@@ -1,4 +1,4 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 
 interface IUiState {
   locale: null | string;
@@ -8,7 +8,7 @@ interface IUiState {
 }
 
 export const useUiStore = defineStore({
-  id: "ui-store",
+  id: 'ui-store',
   state: (): IUiState => ({
     locale: null,
     flashMessage: null,
@@ -19,7 +19,7 @@ export const useUiStore = defineStore({
     setLocale(locale: string) {
       this.locale = locale;
     },
-    
+
     showFlashMessage(txt: string, timeout = 5000) {
       if (this.flashMessage !== txt) {
         this.flashMessage = txt;
@@ -42,8 +42,8 @@ export const useUiStore = defineStore({
   },
   getters: {
     currentLocale: state => state.locale,
-    currentFlashMessage: (state) => state.flashMessage,
-    isNavOpen: (state) => state.navOpen,
-    isNavMini: (state) => state.navMini,
+    currentFlashMessage: state => state.flashMessage,
+    isNavOpen: state => state.navOpen,
+    isNavMini: state => state.navMini,
   },
 });
