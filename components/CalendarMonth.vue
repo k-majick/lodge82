@@ -140,6 +140,7 @@ const selectDate = (newDate: Dayjs) => {
     ...getCurrentMonthDays(),
     ...getNextMonthDays(),
   ];
+  restoreDaysData();
   componentKey.value = componentKey.value + 1;
 };
 
@@ -162,6 +163,18 @@ const selectDay = (selectedDay: Day) => {
   }
 };
 
+const restoreDaysData = () => {
+  days.value.filter((d1: Day) => {
+    if (
+      daysStore.selectedDays.some((d2: Day) => d1.date === d2.date) === true
+    ) {
+      d1.isSelected = true;
+    }
+
+    return daysStore.selectedDays.some((d2: Day) => d1.date === d2.date);
+  });
+};
+
 watch(
   () => uiStore.currentLocale,
   () => {
@@ -170,6 +183,10 @@ watch(
     componentKey.value = componentKey.value + 1;
   },
 );
+
+onUnmounted(() => {
+  daysStore.resetSelectedDays();
+});
 
 // console.dir(dateSelected); //eslint-disable-line
 </script>
