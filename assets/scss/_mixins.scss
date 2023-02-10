@@ -50,14 +50,18 @@
 @mixin btn {
   @include btn-base;
   color: $color-silver-lite;
-  height: 40px;
+  height: 50px;
   min-width: 50px;
-  border: 1px solid $color-silver-lite;
-  border-radius: 6px;
-  padding: 0 15px;
+  border: 1px solid transparentize($color-silver-lite, 0.5);
+  border-radius: 5px;
+
+  &:not(.material-icons) {
+    padding: 0 15px;
+  }
 
   &:active,
   &:hover {
+    border-color: $color-silver-lite;
     box-shadow: 0 0 10px $color-silver-lite;
   }
 

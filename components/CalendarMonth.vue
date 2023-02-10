@@ -1,7 +1,6 @@
 <template>
   <div class="calendar">
-    <CalendarDateIndicator :key="componentKey" :selected-date="selectedDate" />
-
+    <CalendarDateIndicator :key="componentKey" :selected-date="dateSelected" />
     <div class="calendar__body">
       <ol class="calendar__days calendar__days--head">
         <CalendarWeekdays />
@@ -18,34 +17,46 @@
           :is-blocked="day.isBlocked"
           :is-booked="day.isBooked"
           :in-cart="day.inCart"
+          @select-day="selectDay"
         />
       </ul>
     </div>
+    <CalendarDateSelector
+      :date-current="today"
+      :date-selected="dateSelected"
+      @select-date="selectDate"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
 import Day from "@/types/common";
+import { Dayjs } from "dayjs";
 import { useUiStore } from "@/store/ui";
+import { useDaysStore } from "@/store/days";
 import CalendarWeekdays from "@/components/CalendarWeekdays.vue";
 
 const uiStore = useUiStore();
+const daysStore = useDaysStore();
 const componentKey = ref(0);
 
 const { $dayjs } = useNuxtApp();
 $dayjs.locale(uiStore.currentLocale);
 
-const selectedDate = ref($dayjs());
-const numberOfDaysInMonth = $dayjs(selectedDate.value).daysInMonth();
 const today = $dayjs().format("YYYY-MM-DD");
-const year = selectedDate.value.format("YYYY");
-const month = selectedDate.value.format("M");
+const dateSelected = ref($dayjs() as Dayjs);
+const year = ref(dateSelected.value.format("YYYY"));
+const month = ref(dateSelected.value.format("M"));
+const numberOfDaysInMonth = ref($dayjs(dateSelected.value).daysInMonth());
 
 const getWeekday = (date: string) => $dayjs(date).weekday();
 
 const getPreviousMonthDays = (): Day[] => {
   const firstDayOfTheMonthWeekday = getWeekday(getCurrentMonthDays()[0].date);
-  const previousMonth = $dayjs(`${year}-${month}-01`).subtract(1, "month");
+  const previousMonth = $dayjs(`${year.value}-${month.value}-01`).subtract(
+    1,
+    "month",
+  );
   const visibleNumberOfDaysFromPreviousMonth = firstDayOfTheMonthWeekday
     ? firstDayOfTheMonthWeekday - 1
     : 6;
@@ -75,11 +86,13 @@ const getPreviousMonthDays = (): Day[] => {
 };
 
 const getCurrentMonthDays = (): Day[] =>
-  [...Array(numberOfDaysInMonth)].map((_, index) => ({
-    date: $dayjs(`${year}-${month}-${index + 1}`).format("YYYY-MM-DD"),
+  [...Array(numberOfDaysInMonth.value)].map((_, index) => ({
+    date: $dayjs(`${year.value}-${month.value}-${index + 1}`).format(
+      "YYYY-MM-DD",
+    ),
     isCurrentMonth: true,
     isSelected: false,
-    isDisabled: $dayjs(`${year}-${month}-${index + 1}`).isBefore(
+    isDisabled: $dayjs(`${year.value}-${month.value}-${index + 1}`).isBefore(
       $dayjs().add(3, "day").format("YYYY-MM-DD"),
     ),
     isBlocked: false,
@@ -89,9 +102,9 @@ const getCurrentMonthDays = (): Day[] =>
 
 const getNextMonthDays = (): Day[] => {
   const lastDayOfTheMonthWeekday = getWeekday(
-    `${year}-${month}-${getCurrentMonthDays().length}`,
+    `${year.value}-${month.value}-${getCurrentMonthDays().length}`,
   );
-  const nextMonth = $dayjs(`${year}-${month}-01`).add(1, "month");
+  const nextMonth = $dayjs(`${year.value}-${month.value}-01`).add(1, "month");
   const visibleNumberOfDaysFromNextMonth = lastDayOfTheMonthWeekday
     ? 7 - lastDayOfTheMonthWeekday
     : lastDayOfTheMonthWeekday;
@@ -111,24 +124,56 @@ const getNextMonthDays = (): Day[] => {
   }));
 };
 
-const days = [
+const days = ref([
   ...getPreviousMonthDays(),
   ...getCurrentMonthDays(),
   ...getNextMonthDays(),
-];
+]);
+
+const selectDate = (newDate: Dayjs) => {
+  dateSelected.value = newDate;
+  year.value = dateSelected.value.format("YYYY");
+  month.value = dateSelected.value.format("M");
+  numberOfDaysInMonth.value = $dayjs(dateSelected.value).daysInMonth();
+  days.value = [
+    ...getPreviousMonthDays(),
+    ...getCurrentMonthDays(),
+    ...getNextMonthDays(),
+  ];
+  componentKey.value = componentKey.value + 1;
+};
+
+const selectDay = (selectedDay: Day) => {
+  const dayIndex = days.value.indexOf(selectedDay);
+
+  if (
+    daysStore.selectedDays.filter((day: Day) => day.date === selectedDay.date)
+      .length > 0
+  ) {
+    days.value[dayIndex].isSelected = false;
+    daysStore.removeSelectedDay(selectedDay.date);
+  } else {
+    const selectedDayClone = {
+      ...selectedDay,
+      isSelected: true,
+    };
+    days.value[dayIndex].isSelected = true;
+    daysStore.addSelectedDay(selectedDayClone);
+  }
+};
 
 watch(
   () => uiStore.currentLocale,
   () => {
     $dayjs.locale(uiStore.currentLocale);
-    selectedDate.value = $dayjs();
+    dateSelected.value = $dayjs();
     componentKey.value = componentKey.value + 1;
   },
 );
 
-// console.dir(selectedDate); //eslint-disable-line
+// console.dir(dateSelected); //eslint-disable-line
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/assets/scss/components/_calendar";
 </style>

@@ -17,10 +17,10 @@
       justify-content: center;
       align-items: center;
       position: absolute;
-      background-color: $color-black;
+      background-color: $color-ternary;
       border-radius: 15px;
       font-size: 75%;
-      color: $color-yellow;
+      color: $color-hilite;
       right: 5px;
       bottom: 5px;
       width: 15px;
@@ -42,7 +42,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        color: $color-teal;
+        color: $color-primary;
         text-transform: uppercase;
         font-size: 80%;
         font-weight: bold;
@@ -59,11 +59,11 @@
   &__link,
   &__btn {
     @include btn-base;
-    color: $color-silver-lite;
+    color: $color-secondary;
 
     &.active,
     &:hover {
-      color: $color-yellow;
+      color: $color-hilite;
     }
 
     &[aria-disabled="true"] {
@@ -122,7 +122,7 @@
       flex-flow: column;
       list-style: none;
       padding: 2.5px 0;
-      background-color: $color-black;
+      background-color: $color-ternary;
       border-radius: 3px;
 
       #{$self}__link {

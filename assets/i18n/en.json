@@ -47,5 +47,8 @@
     "loginNotFound": "User not found",
     "loginSuccess": "You are now logged in",
     "loginFail": "Wrong password"
+  },
+  "calendar": {
+    "today": "Today"
   }
 }

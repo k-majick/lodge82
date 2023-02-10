@@ -3,7 +3,7 @@
     class="calendar__day"
     :class="{
       'calendar__day--today': isToday,
-      'calendar__day--not-current': !isCurrentMonth,
+      'calendar__day--current': isCurrentMonth,
       'calendar__day--selected': isSelected,
       'calendar__day--disabled': isDisabled,
       'calendar__day--blocked': isBlocked,
@@ -33,9 +33,7 @@ const props = defineProps({
   inCart: Boolean,
 });
 
-const selectDay = () => {
-  console.dir(props); // eslint-disable-line
-};
-
+const emit = defineEmits(["selectDay"]);
+const selectDay = () => emit("selectDay", props.day);
 const label = $dayjs(props.day?.date).format("D");
 </script>

@@ -15,7 +15,13 @@
 
     &--text {
       #{$self}__input {
-        border: 1px solid $color-silver-lite;
+        border: 1px solid transparentize($color-silver-lite, 0.5);
+      }
+    }
+
+    &--error {
+      #{$self}__input {
+        border-color: $color-yellow !important;
       }
     }
   }
@@ -27,7 +33,7 @@
   &__input {
     @include trans;
     background: none;
-    border-radius: 3px;
+    border-radius: 5px;
     color: $color-silver-lite;
     margin: 2.5px 0;
     padding: 10px;
@@ -35,6 +41,7 @@
     &:focus {
       outline: 0;
       box-shadow: inset 0 0 10px $color-silver-lite;
+      border-color: $color-silver-lite;
     }
   }
 

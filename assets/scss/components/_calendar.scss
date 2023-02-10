@@ -1,5 +1,16 @@
 .calendar {
   $self: &;
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+  padding-left: 0;
+
+  &__body {
+    width: calc(100% - 30px);
+    display: flex;
+    flex-flow: column;
+  }
+
   &__days {
     list-style-type: none;
     margin: 0;
@@ -11,11 +22,11 @@
     text-align: center;
     grid-column-gap: 1px;
     grid-row-gap: 1px;
-    border-top: 1px solid transparent;
-    border-right: 1px solid transparent;
+    border: 1px solid transparent;
 
     &--head {
       height: auto;
+      border-bottom-color: transparentize($color-secondary, 0.5);
 
       #{$self}__day {
         padding: 5px 0;
@@ -24,26 +35,81 @@
 
     &--main {
       #{$self}__day {
-        border: 1px solid transparentize($color-white, 0.5);
-        cursor: pointer;
         position: relative;
+        border: 1px solid transparentize($color-secondary, 0.5);
+        cursor: pointer;
+
+        span {
+          opacity: 0.5;
+        }
+
+        &--today {
+          border-color: $color-hilite !important;
+        }
+
+        &--current {
+          span {
+            opacity: 1;
+          }
+        }
+
+        &--blocked,
+        &--disabled {
+          pointer-events: none;
+          border-color: transparent;
+
+          span {
+            opacity: 0.5;
+          }
+        }
+
+        &--selected {
+          background-color: transparentize($color-secondary, 0.25);
+          color: $color-primary;
+
+          span {
+            opacity: 1;
+          }
+        }
+
+        &:hover {
+          border-color: $color-hilite !important;
+        }
       }
     }
   }
 
   &__indicator {
+    writing-mode: tb-rl;
+    transform: rotate(-180deg);
     text-align: center;
+    text-transform: uppercase;
+    width: 30px;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: bold;
-    margin-bottom: 15px;
-    text-transform: capitalize;
   }
-  
+
+  &__selector {
+    padding: 15px 0;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    #{$self}__btn {
+      @include btn;
+
+      & + #{$self}__btn {
+        margin-left: 1px;
+      }
+    }
+  }
+
   &__day {
     padding: 15px;
-
-    &--today {
-      background-color: $color-white;
-      color: $color-teal;
-    }
   }
 }

@@ -35,7 +35,6 @@ export const useUiStore = defineStore({
     toggleNavOpen() {
       this.navOpen = !this.navOpen;
     },
-
     toggleNavMini() {
       this.navMini = !this.navMini;
     },
