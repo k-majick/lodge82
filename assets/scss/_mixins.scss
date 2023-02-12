@@ -6,19 +6,19 @@
   padding-left: 15px;
   padding-right: 15px;
   width: 100%;
-  @include media("<=m") {
+  @include media('<=m') {
     max-width: 480px;
   }
-  @include media(">m", "<=l-s") {
+  @include media('>m', '<=l-s') {
     max-width: 970px;
   }
-  @include media(">=l-s") {
+  @include media('>=l-s') {
     max-width: 1080px;
   }
 }
 /* effects */
-@mixin trans($time: 0.25, $prop: "") {
-  @if $prop != "" {
+@mixin trans($time: 0.25, $prop: '') {
+  @if $prop != '' {
     transition: $prop #{$time}s;
   } @else {
     transition: all #{$time}s;

@@ -1,35 +1,35 @@
 <template>
   <form class="form form--login" @submit.prevent="sendForm">
     <div class="form__group form__group--text">
-      <label class="form__label">{{ $t("form.username") }}</label>
+      <label class="form__label">{{ $t('form.username') }}</label>
       <input v-model="userName" class="form__input" type="text" />
     </div>
     <div class="form__group form__group--text">
-      <label class="form__label">{{ $t("form.password") }}</label>
+      <label class="form__label">{{ $t('form.password') }}</label>
       <input v-model="userPassword" class="form__input" type="password" />
     </div>
     <div class="form__group form__group--button">
       <button ref="submitBtn" type="submit" class="main__btn">
-        {{ $t("form.loginAction") }}
+        {{ $t('form.loginAction') }}
       </button>
     </div>
   </form>
 </template>
 
 <script lang="ts" setup>
-import type { Ref } from "vue";
-import { useRouter } from "vue-router";
-import { useI18n } from "vue-i18n";
-import { useUiStore } from "@/store/ui";
-import { useAuthStore } from "@/store/auth";
+import type { Ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+import { useUiStore } from '@/store/ui';
+import { useAuthStore } from '@/store/auth';
 
 const router = useRouter();
 const uiStore = useUiStore();
 const authStore = useAuthStore();
 const { t } = useI18n();
 
-const userName = ref("");
-const userPassword = ref("");
+const userName = ref('');
+const userPassword = ref('');
 const submitBtn: Ref<any> = ref<HTMLInputElement | undefined>();
 
 const sendForm = async () => {
@@ -40,12 +40,12 @@ const sendForm = async () => {
     password: userPassword.value,
   };
 
-  const res = await authStore.authenticateUser(user);
+  const res = await authStore.loginUser(user);
 
   uiStore.showFlashMessage(t(res.msg));
 
   if (res.success) {
-    router.push("/");
+    router.push('/');
   } else {
     resetForm();
     setTimeout(() => (submitBtn.value.disabled = false), 5000);
@@ -53,10 +53,10 @@ const sendForm = async () => {
 };
 
 const resetForm = () => {
-  userPassword.value = "";
+  userPassword.value = '';
 };
 </script>
 
 <style lang="scss" scoped>
-@import "./assets/scss/components/_form";
+@import './assets/scss/components/_form';
 </style>

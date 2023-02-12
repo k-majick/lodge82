@@ -1,12 +1,12 @@
-import { defineStore } from "pinia";
-import Day from "@/types/common";
+import { defineStore } from 'pinia';
+import Day from '@/types/common';
 
 interface IDaysState {
   daysSelected: Day[];
 }
 
 export const useDaysStore = defineStore({
-  id: "days-store",
+  id: 'days-store',
   state: (): IDaysState => ({
     daysSelected: [],
   }),

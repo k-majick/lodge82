@@ -21,8 +21,8 @@ const isNavOpen = false;
 const isNavMini = false;
 
 const gotoStart = () => {
-  if (route.path === "/") {
-    router.push("/start");
+  if (route.path === '/') {
+    router.push('/start');
   }
 };
 
@@ -35,5 +35,5 @@ watch(
 </script>
 
 <style lang="scss">
-@import "./assets/scss/components/_main";
+@import './assets/scss/components/_main';
 </style>

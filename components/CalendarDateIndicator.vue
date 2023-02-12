@@ -12,5 +12,5 @@ const props = defineProps({
   },
 });
 
-const displayDate = props.selectedDate.format("MMMM YYYY");
+const displayDate = props.selectedDate.format('MMMM YYYY');
 </script>

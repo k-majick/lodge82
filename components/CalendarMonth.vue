@@ -2,9 +2,9 @@
   <div class="calendar">
     <CalendarDateIndicator :key="componentKey" :selected-date="dateSelected" />
     <div class="calendar__body">
-      <ol class="calendar__days calendar__days--head">
+      <ul class="calendar__days calendar__days--head">
         <CalendarWeekdays />
-      </ol>
+      </ul>
       <ul class="calendar__days calendar__days--main">
         <CalendarMonthDay
           v-for="day in days"
@@ -30,11 +30,11 @@
 </template>
 
 <script lang="ts" setup>
-import Day from "@/types/common";
-import { Dayjs } from "dayjs";
-import { useUiStore } from "@/store/ui";
-import { useDaysStore } from "@/store/days";
-import CalendarWeekdays from "@/components/CalendarWeekdays.vue";
+import Day from '@/types/common';
+import { Dayjs } from 'dayjs';
+import { useUiStore } from '@/store/ui';
+import { useDaysStore } from '@/store/days';
+import CalendarWeekdays from '@/components/CalendarWeekdays.vue';
 
 const uiStore = useUiStore();
 const daysStore = useDaysStore();
@@ -43,10 +43,10 @@ const componentKey = ref(0);
 const { $dayjs } = useNuxtApp();
 $dayjs.locale(uiStore.currentLocale);
 
-const today = $dayjs().format("YYYY-MM-DD");
+const today = $dayjs().format('YYYY-MM-DD');
 const dateSelected = ref($dayjs() as Dayjs);
-const year = ref(dateSelected.value.format("YYYY"));
-const month = ref(dateSelected.value.format("M"));
+const year = ref(dateSelected.value.format('YYYY'));
+const month = ref(dateSelected.value.format('M'));
 const numberOfDaysInMonth = ref($dayjs(dateSelected.value).daysInMonth());
 
 const getWeekday = (date: string) => $dayjs(date).weekday();
@@ -55,7 +55,7 @@ const getPreviousMonthDays = (): Day[] => {
   const firstDayOfTheMonthWeekday = getWeekday(getCurrentMonthDays()[0].date);
   const previousMonth = $dayjs(`${year.value}-${month.value}-01`).subtract(
     1,
-    "month",
+    'month',
   );
   const visibleNumberOfDaysFromPreviousMonth = firstDayOfTheMonthWeekday
     ? firstDayOfTheMonthWeekday - 1
@@ -63,22 +63,22 @@ const getPreviousMonthDays = (): Day[] => {
   const previousMonthLastMondayDayOfMonth = $dayjs(
     getCurrentMonthDays()[0].date,
   )
-    .subtract(visibleNumberOfDaysFromPreviousMonth, "day")
+    .subtract(visibleNumberOfDaysFromPreviousMonth, 'day')
     .date();
 
-  return [...Array(visibleNumberOfDaysFromPreviousMonth)].map((day, index) => ({
+  return [...Array(visibleNumberOfDaysFromPreviousMonth)].map((_, index) => ({
     date: $dayjs(
       `${previousMonth.year()}-${previousMonth.month() + 1}-${
         previousMonthLastMondayDayOfMonth + index
       }`,
-    ).format("YYYY-MM-DD"),
+    ).format('YYYY-MM-DD'),
     isCurrentMonth: false,
     isSelected: false,
     isDisabled: $dayjs(
       `${previousMonth.year()}-${previousMonth.month() + 1}-${
         previousMonthLastMondayDayOfMonth + index
       }`,
-    ).isBefore($dayjs().format("YYYY-MM-DD")),
+    ).isBefore($dayjs().format('YYYY-MM-DD')),
     isBlocked: false,
     isBooked: false,
     inCart: false,
@@ -88,12 +88,12 @@ const getPreviousMonthDays = (): Day[] => {
 const getCurrentMonthDays = (): Day[] =>
   [...Array(numberOfDaysInMonth.value)].map((_, index) => ({
     date: $dayjs(`${year.value}-${month.value}-${index + 1}`).format(
-      "YYYY-MM-DD",
+      'YYYY-MM-DD',
     ),
     isCurrentMonth: true,
     isSelected: false,
     isDisabled: $dayjs(`${year.value}-${month.value}-${index + 1}`).isBefore(
-      $dayjs().add(3, "day").format("YYYY-MM-DD"),
+      $dayjs().add(3, 'day').format('YYYY-MM-DD'),
     ),
     isBlocked: false,
     isBooked: false,
@@ -104,20 +104,20 @@ const getNextMonthDays = (): Day[] => {
   const lastDayOfTheMonthWeekday = getWeekday(
     `${year.value}-${month.value}-${getCurrentMonthDays().length}`,
   );
-  const nextMonth = $dayjs(`${year.value}-${month.value}-01`).add(1, "month");
+  const nextMonth = $dayjs(`${year.value}-${month.value}-01`).add(1, 'month');
   const visibleNumberOfDaysFromNextMonth = lastDayOfTheMonthWeekday
     ? 7 - lastDayOfTheMonthWeekday
     : lastDayOfTheMonthWeekday;
 
-  return [...Array(visibleNumberOfDaysFromNextMonth)].map((day, index) => ({
+  return [...Array(visibleNumberOfDaysFromNextMonth)].map((_, index) => ({
     date: $dayjs(
       `${nextMonth.year()}-${nextMonth.month() + 1}-${index + 1}`,
-    ).format("YYYY-MM-DD"),
+    ).format('YYYY-MM-DD'),
     isCurrentMonth: false,
     isSelected: false,
     isDisabled: $dayjs(
       `${nextMonth.year()}-${nextMonth.month() + 1}-${index + 1}`,
-    ).isBefore($dayjs().format("YYYY-MM-DD")),
+    ).isBefore($dayjs().format('YYYY-MM-DD')),
     isBlocked: false,
     isBooked: false,
     inCart: false,
@@ -132,8 +132,8 @@ const days = ref([
 
 const selectDate = (newDate: Dayjs) => {
   dateSelected.value = newDate;
-  year.value = dateSelected.value.format("YYYY");
-  month.value = dateSelected.value.format("M");
+  year.value = dateSelected.value.format('YYYY');
+  month.value = dateSelected.value.format('M');
   numberOfDaysInMonth.value = $dayjs(dateSelected.value).daysInMonth();
   days.value = [
     ...getPreviousMonthDays(),
@@ -192,5 +192,5 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/components/_calendar";
+@import '@/assets/scss/components/_calendar';
 </style>

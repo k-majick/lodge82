@@ -1,12 +1,12 @@
-"use strict";
-const express = require("express");
-const serverless = require("serverless-http");
-const nodemailer = require("nodemailer");
+'use strict';
+const express = require('express');
+const serverless = require('serverless-http');
+const nodemailer = require('nodemailer');
 const app = express();
-const formidable = require("express-formidable");
+const formidable = require('express-formidable');
 const router = express.Router();
 
-require("dotenv").config();
+require('dotenv').config();
 
 const emailTo = process.env.EMAIL;
 const clientId = process.env.CLIENT_ID;
@@ -15,23 +15,23 @@ const redirectUrl = process.env.REDIRECT_URL;
 const refreshToken = process.env.REFRESH_TOKEN;
 
 app.use(formidable());
-app.use("/.netlify/functions/send-email", router); // path must route to lambda
+app.use('/.netlify/functions/send-email', router); // path must route to lambda
 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   await sendEmail(req.fields).then(r => {
     if (r === 200) {
       res.status(201).json({
-        status: "success!",
+        status: 'success!',
       });
     } else {
       res.status(400).json({
-        status: "fail...",
+        status: 'fail...',
       });
     }
   });
 });
 
-const { google } = require("googleapis");
+const { google } = require('googleapis');
 const OAuth2 = google.auth.OAuth2;
 const oauth2Client = new OAuth2(clientId, clientSecret, redirectUrl);
 
@@ -43,12 +43,12 @@ const accessToken = oauth2Client.getAccessToken();
 
 const sendEmail = async data => {
   const transporter = nodemailer.createTransport({
-    service: "gmail",
-    host: "smtp.gmail.com",
+    service: 'gmail',
+    host: 'smtp.gmail.com',
     port: 465,
     secure: true,
     auth: {
-      type: "OAuth2",
+      type: 'OAuth2',
       user: emailTo,
       clientId: clientId,
       clientSecret: clientSecret,
