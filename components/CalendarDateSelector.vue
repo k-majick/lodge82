@@ -4,7 +4,7 @@
       keyboard_arrow_left
     </button>
     <button class="calendar__btn" @click="selectCurrent">
-      {{ $t('calendar.today') }}
+      {{ $t("calendar.today") }}
     </button>
     <button class="calendar__btn material-icons" @click="selectNext">
       keyboard_arrow_right
@@ -26,20 +26,20 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['selectDate']);
+const emit = defineEmits(["selectDate"]);
 
 const selectPrevious = () => {
-  const newSelectedDate = $dayjs(props.dateSelected).subtract(1, 'month');
-  emit('selectDate', newSelectedDate);
+  const newSelectedDate = $dayjs(props.dateSelected).subtract(1, "month");
+  emit("selectDate", newSelectedDate);
 };
 
 const selectCurrent = () => {
   const newSelectedDate = $dayjs(props.dateCurrent);
-  emit('selectDate', newSelectedDate);
+  emit("selectDate", newSelectedDate);
 };
 
 const selectNext = () => {
-  const newSelectedDate = $dayjs(props.dateSelected).add(1, 'month');
-  emit('selectDate', newSelectedDate);
+  const newSelectedDate = $dayjs(props.dateSelected).add(1, "month");
+  emit("selectDate", newSelectedDate);
 };
 </script>

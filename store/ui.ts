@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
 interface IUiState {
   locale: null | string;
@@ -8,7 +8,7 @@ interface IUiState {
 }
 
 export const useUiStore = defineStore({
-  id: 'ui-store',
+  id: "ui-store",
   state: (): IUiState => ({
     locale: null,
     flashMessage: null,

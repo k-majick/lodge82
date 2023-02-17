@@ -1,7 +1,6 @@
-import { NextFunction, Request, Response } from 'express';
-import { User, IUser } from '../models/userModel';
-import jwt from 'jsonwebtoken';
-import passport from 'passport';
+import { NextFunction, Request, Response } from "express";
+import { User, IUser } from "../models/userModel";
+import jwt from "jsonwebtoken";
 
 export class UserController {
   public async registerUser(req: Request, res: Response): Promise<void> {
@@ -12,42 +11,45 @@ export class UserController {
       password: req.body.password,
     });
 
-    newUser.getUserByEmail(req.body.email, (err: Error, user: IUser) => {
-      if (err) throw err;
-      if (user) {
-        return res.json({
-          success: false,
-          msg: 'validation.registerEmailExists',
-        });
+    newUser.getUserByEmail(req.body.email).then((user: null | IUser) => {
+      if (user === null) {
+        checkUsername();
+        return;
       }
 
-      newUser.getUserByUsername(
-        req.body.username,
-        (err: Error, user: IUser) => {
-          if (err) throw err;
-          if (user) {
-            return res.json({
-              success: false,
-              msg: 'validation.registerUserExists',
-            });
-          }
-
-          newUser.createUser(newUser, (err: Error, _: IUser) => {
-            if (err) {
-              res.json({
-                success: false,
-                msg: 'validation.registerFail',
-              });
-            } else {
-              res.json({
-                success: true,
-                msg: 'validation.registerSuccess',
-              });
-            }
-          });
-        },
-      );
+      return res.status(409).json({
+        success: false,
+        msg: "validation.registerEmailExists",
+      });
     });
+
+    const checkUsername = () =>
+      newUser.getUserByUsername(newUser.username).then((user: null | IUser) => {
+        if (user === null) {
+          createUser();
+          return;
+        }
+
+        return res.status(409).json({
+          success: false,
+          msg: "validation.registerUserExists",
+        });
+      });
+
+    const createUser = () =>
+      newUser.createUser(newUser).then((user: null | IUser) => {
+        if (user) {
+          res.status(200).json({
+            success: true,
+            msg: "validation.registerSuccess",
+          });
+        } else {
+          res.status(500).json({
+            success: false,
+            msg: "validation.registerFail",
+          });
+        }
+      });
   }
 
   public authenticateUser(req: Request, res: Response, next: NextFunction) {
@@ -56,55 +58,56 @@ export class UserController {
       password: req.body.password,
     });
 
-    newUser.getUserByUsername(newUser.username, (err: Error, user: IUser) => {
-      if (err) throw err;
-      if (!user) {
-        return res.json({
-          success: false,
-          msg: 'validation.loginNotFound',
-        });
+    newUser.getUserByUsername(newUser.username).then((user: null | IUser) => {
+      if (user) {
+        comparePassword(user);
+        return;
       }
 
-      newUser.comparePassword(
-        newUser.password,
-        user.password,
-        (err: Error, isMatch: boolean) => {
-          if (err) throw err;
-          if (isMatch) {
-            const token = jwt.sign(
-              {
-                data: user,
-              },
-              process.env.SECRET as string,
-              {
-                expiresIn: 604800, // 1 week
-              },
-            );
-
-            res.json({
-              success: true,
-              msg: 'validation.loginSuccess',
-              token: `Bearer ${token}`,
-              user: {
-                id: user._id,
-                name: user.name,
-                username: user.username,
-                email: user.email,
-              },
-            });
-          } else {
-            return res.json({
-              success: false,
-              msg: 'validation.loginFail',
-            });
-          }
-        },
-      );
+      return res.status(404).json({
+        success: false,
+        msg: "validation.userNotFound",
+      });
     });
+
+    const comparePassword = (user: IUser) =>
+      newUser
+        .comparePassword(newUser.password, user.password)
+        .then((isMatch: boolean) => {
+          if (isMatch) {
+            signIn(user);
+            return;
+          }
+
+          return res.status(401).json({
+            success: false,
+            msg: "validation.wrongPassword",
+          });
+        });
+
+    const signIn = (user: IUser) => {
+      const token = jwt.sign(
+        { data: user },
+        process.env.SECRET as string,
+        { expiresIn: 604800 }, // 1 week
+      );
+
+      return res.status(200).json({
+        success: true,
+        msg: "validation.loginSuccess",
+        token: `Bearer ${token}`,
+        user: {
+          id: user._id,
+          name: user.name,
+          username: user.username,
+          email: user.email,
+        },
+      });
+    };
   }
 
   public async getProfile(req: Request, res: Response): Promise<void> {
-    res.json({
+    res.status(200).json({
       user: req.user,
     });
   }

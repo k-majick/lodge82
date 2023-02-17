@@ -1,6 +1,7 @@
-import { Router } from 'express';
-import { UserController } from '../controllers/userController';
-import passport from 'passport';
+import { Router } from "express";
+import { UserController } from "../controllers/userController";
+import passport from "passport";
+import "../config/passportHandler";
 
 export class UserRoutes {
   router: Router;
@@ -13,11 +14,11 @@ export class UserRoutes {
 
   routes() {
     // Use Identity Provider in production
-    this.router.post('/register', this.userController.registerUser);
-    this.router.post('/login', this.userController.authenticateUser);
+    this.router.post("/register", this.userController.registerUser);
+    this.router.post("/login", this.userController.authenticateUser);
     this.router.get(
-      '/profile',
-      passport.authenticate('jwt', {
+      "/profile",
+      passport.authenticate("jwt", {
         session: true,
       }),
       this.userController.getProfile,

@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
 interface User {
   id?: string;
@@ -14,7 +14,7 @@ interface IAuthState {
 }
 
 export const useAuthStore = defineStore({
-  id: 'auth-store',
+  id: "auth-store",
   state: (): IAuthState => ({
     user: null,
     token: null,
@@ -22,9 +22,9 @@ export const useAuthStore = defineStore({
   actions: {
     async registerUser(user: User) {
       try {
-        const res = fetch('/.netlify/functions/server/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+        const res = fetch("/.netlify/functions/server/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(user),
         })
           .then(res => res.json())
@@ -43,9 +43,9 @@ export const useAuthStore = defineStore({
 
     async loginUser(user: User) {
       try {
-        const res = fetch('/.netlify/functions/server/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+        const res = fetch("/.netlify/functions/server/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(user),
         })
           .then(res => res.json())
@@ -64,10 +64,10 @@ export const useAuthStore = defineStore({
 
     async getProfile() {
       try {
-        const res = fetch('/.netlify/functions/server/profile', {
-          method: 'GET',
+        const res = fetch("/.netlify/functions/server/profile", {
+          method: "GET",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: this.token as string,
           },
         })

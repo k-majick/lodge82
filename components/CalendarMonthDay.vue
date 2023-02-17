@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import $dayjs from 'dayjs';
+import $dayjs from "dayjs";
 
 const props = defineProps({
   day: {
@@ -33,7 +33,7 @@ const props = defineProps({
   inCart: Boolean,
 });
 
-const emit = defineEmits(['selectDay']);
-const selectDay = () => emit('selectDay', props.day);
-const label = $dayjs(props.day?.date).format('D');
+const emit = defineEmits(["selectDay"]);
+const selectDay = () => emit("selectDay", props.day);
+const label = $dayjs(props.day?.date).format("D");
 </script>

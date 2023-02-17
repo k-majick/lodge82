@@ -40,13 +40,13 @@
     "messageRequired": "Bitte geben Sie Ihre Nachricht ein",
     "messageMin": "Nachricht ist zu kurz",
     "messageMax": "Die Nachricht darf 1000 Zeichen nicht überschreiten",
-    "registerUserExists": "E-mail existiert",
-    "registerEmailExists": "Benutzer exists",
+    "registerUserExists": "Benutzer existiert",
+    "registerEmailExists": "E-mail existiert",
     "registerFail": "Neuer Benutzer konnte nicht registriert werden",
     "registerSuccess": "Benutzer registriert",
-    "loginNotFound": "Benutzer nicht gefunden",
+    "userNotFound": "Benutzer nicht gefunden",
     "loginSuccess": "Sie sind jetzt eingeloggt",
-    "loginFail": "Falsches Passwort"
+    "wrongPassword": "Falsches Passwort"
   },
   "calendar": {
     "today": "Heute"
