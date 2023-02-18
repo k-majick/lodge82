@@ -32,17 +32,23 @@ const userSchema: Schema = new Schema<IUser>({
   },
 });
 
-userSchema.methods.getUserById = async (id: number) => {
+userSchema.methods.getUserById = async (id: number): Promise<IUser | null> => {
   const user = await User.findById(id);
 
   return await new Promise(resolve => resolve(user));
 };
 
-userSchema.methods.getUserById = (id: number, callback: Function) => {
-  User.findById(id, callback);
+userSchema.methods.getUserById = async (
+  id: number,
+): Promise<IUser | null> => {
+  const user = User.findById(id);
+
+  return await new Promise(resolve => resolve(user));
 };
 
-userSchema.methods.getUserByEmail = async (email: string) => {
+userSchema.methods.getUserByEmail = async (
+  email: string,
+): Promise<IUser | null> => {
   const query = {
     email: email,
   };
@@ -51,11 +57,12 @@ userSchema.methods.getUserByEmail = async (email: string) => {
   return await new Promise(resolve => resolve(user));
 };
 
-userSchema.methods.getUserByUsername = async (username: string) => {
+userSchema.methods.getUserByUsername = async (
+  username: string,
+): Promise<IUser | null> => {
   const query = {
     username: username,
   };
-
   const user = await User.findOne(query);
 
   return await new Promise(resolve => resolve(user));
@@ -64,13 +71,13 @@ userSchema.methods.getUserByUsername = async (username: string) => {
 userSchema.methods.comparePassword = async (
   candidatePassword: string,
   hash: string,
-) => {
+): Promise<boolean> => {
   const isMatch = await bcrypt.compare(candidatePassword, hash);
 
   return await new Promise(resolve => resolve(isMatch));
 };
 
-userSchema.methods.createUser = async (newUser: Record<string, any>) => {
+userSchema.methods.createUser = async (newUser: IUser): Promise<IUser> => {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(newUser.password, salt);
 

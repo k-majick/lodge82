@@ -2,7 +2,7 @@ import passport from "passport";
 import { Strategy, ExtractJwt } from "passport-jwt";
 import { User, IUser } from "../models/userModel.js";
 
-const UserInstance = new User();
+const newUser = new User();
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -11,18 +11,14 @@ const opts = {
 
 passport.use(
   new Strategy(opts, (jwt_payload, done) => {
-    UserInstance.getUserById(
-      jwt_payload.data._id,
-      (err: Error, user: IUser) => {
-        if (err) {
-          return done(err, false);
-        } else if (user) {
+    newUser.getUserById(jwt_payload.data._id)
+      .then((user: null | IUser) => {
+        if (user) {
           return done(null, user);
-        } else {
-          return done(null, false);
         }
-      },
-    );
+
+        return done(null, false);
+      });
   }),
 );
 

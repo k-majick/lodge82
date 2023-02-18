@@ -1,9 +1,9 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { User, IUser } from "../models/userModel";
 import jwt from "jsonwebtoken";
 
 export class UserController {
-  public async registerUser(req: Request, res: Response): Promise<void> {
+  public registerUser(req: Request, res: Response): void {
     const newUser = new User({
       name: req.body.name,
       username: req.body.username,
@@ -52,7 +52,7 @@ export class UserController {
       });
   }
 
-  public authenticateUser(req: Request, res: Response, next: NextFunction) {
+  public authenticateUser(req: Request, res: Response): void {
     const newUser = new User({
       username: req.body.username,
       password: req.body.password,
@@ -106,7 +106,7 @@ export class UserController {
     };
   }
 
-  public async getProfile(req: Request, res: Response): Promise<void> {
+  public getProfile(req: Request, res: Response): void {
     res.status(200).json({
       user: req.user,
     });
