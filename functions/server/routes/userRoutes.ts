@@ -1,11 +1,13 @@
 import { Router } from "express";
 import { UserController } from "../controllers/userController";
+import { FormController } from "../controllers/formController";
 import passport from "passport";
 import "../config/passportHandler";
 
 export class UserRoutes {
-  router: Router;
+  public router: Router;
   public userController: UserController = new UserController();
+  public formController: FormController = new FormController();
 
   constructor() {
     this.router = Router();
@@ -23,5 +25,6 @@ export class UserRoutes {
       }),
       this.userController.getProfile,
     );
+    this.router.post("/sendMessage", this.formController.sendMessage);
   }
 }

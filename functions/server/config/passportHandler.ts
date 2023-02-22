@@ -11,14 +11,13 @@ const opts = {
 
 passport.use(
   new Strategy(opts, (jwt_payload, done) => {
-    newUser.getUserById(jwt_payload.data._id)
-      .then((user: null | IUser) => {
-        if (user) {
-          return done(null, user);
-        }
+    newUser.getUserById(jwt_payload.data._id).then((user: null | IUser) => {
+      if (user) {
+        return done(null, user);
+      }
 
-        return done(null, false);
-      });
+      return done(null, false);
+    });
   }),
 );
 

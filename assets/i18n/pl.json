@@ -19,6 +19,10 @@
     "register": {
       "title": "Rejestracja",
       "slug": "rejestracja"
+    },
+    "contact": {
+      "title": "Kontakt",
+      "slug": "kontakt"
     }
   },
   "form": {
@@ -26,12 +30,15 @@
     "username": "Nazwa użytkownika",
     "email": "E-mail",
     "password": "Hasło",
-    "loginAction": "Zaloguj",
-    "registerAction": "Zarejestruj"
+    "message": "Wiadomość",
+    "actionLogin": "Zaloguj",
+    "actionRegister": "Zarejestruj",
+    "actionSend": "Wyślij",
+    "actionSending": "Wysyłam"
   },
   "validation": {
     "nameRequired": "Podaj swoje imię",
-    "nameMin": "Imię powinno zawierać co najmniej 3 litery",
+    "nameMin": "Imię musi zawierać co najmniej 3 litery",
     "nameMax": "Imię nie może przekraczać 30 liter",
     "nameFormat": "Imię może zawierać tylko litery",
     "emailRequired": "Podaj swój adres e-mail",
@@ -40,13 +47,18 @@
     "messageRequired": "Wpisz swoją wiadomość",
     "messageMin": "Wiadomość jest za krótka",
     "messageMax": "Wiadomość nie może przekraczać 1000 znaków",
+    "messageSuccess": "Wiadomość wysłana",
+    "messageFail": "Wystąpił błąd, wiadomość nie została wysłana",
+    "passwordRequired": "Wpisz swoje hasło",
+    "passwordMin": "Hasło musi zawierać co najmniej 3 znaki",
+    "passwordMax": "Hasło nie może przekraczać 20 znaków",
     "registerUserExists": "Użytkownik istnieje",
     "registerEmailExists": "E-mail istnieje",
     "registerFail": "Nie udało się zarejestrować",
     "registerSuccess": "Użytkownik zarejestrowany",
     "userNotFound": "Użytkownik nie istnieje",
     "loginSuccess": "Zalogowano",
-    "wrongPassword": "Niepoprawne password"
+    "wrongPassword": "Niepoprawne hasło"
   },
   "calendar": {
     "today": "Dzisiaj"

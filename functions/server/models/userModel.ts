@@ -38,9 +38,7 @@ userSchema.methods.getUserById = async (id: number): Promise<IUser | null> => {
   return await new Promise(resolve => resolve(user));
 };
 
-userSchema.methods.getUserById = async (
-  id: number,
-): Promise<IUser | null> => {
+userSchema.methods.getUserById = async (id: number): Promise<IUser | null> => {
   const user = User.findById(id);
 
   return await new Promise(resolve => resolve(user));

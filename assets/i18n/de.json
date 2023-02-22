@@ -19,6 +19,10 @@
     "register": {
       "title": "Registrierung",
       "slug": "registrierung"
+    },
+    "contact": {
+      "title": "Kontakt",
+      "slug": "kontakt"
     }
   },
   "form": {
@@ -26,8 +30,11 @@
     "username": "Benutzername",
     "email": "E-mail",
     "password": "Passwort",
-    "loginAction": "Anmelden",
-    "registerAction": "Registrieren"
+    "message": "Nachricht",
+    "actionLogin": "Anmelden",
+    "actionRegister": "Registrieren",
+    "actionSend": "Senden",
+    "actionSending": "Warten"
   },
   "validation": {
     "nameRequired": "Bitte geben Sie Ihren Namen ein",
@@ -40,6 +47,11 @@
     "messageRequired": "Bitte geben Sie Ihre Nachricht ein",
     "messageMin": "Nachricht ist zu kurz",
     "messageMax": "Die Nachricht darf 1000 Zeichen nicht überschreiten",
+    "messageSuccess": "Die Nachricht wurde versendet",
+    "messageFail": "Fehler, die Nachricht wurde nicht gesendet",
+    "passwordRequired": "Bitte geben Sie Ihren Passwort",
+    "passwordMin": "Passwort sollte mindestens 3 Zeichen enthalten",
+    "passwordMax": "Passwort darf 20 Zeichen nicht überschreiten",
     "registerUserExists": "Benutzer existiert",
     "registerEmailExists": "E-mail existiert",
     "registerFail": "Neuer Benutzer konnte nicht registriert werden",

@@ -2,9 +2,15 @@
   <nav class="nav nav--side" :class="{ open: isNavOpen, mini: isNavMini }">
     <ul class="nav__items">
       <li class="nav__item">
-        <nuxt-link to="/start" class="nav__link">
+        <nuxt-link to="start" class="nav__link">
           <span class="nav__icon material-icons">home</span>
           <span class="nav__text">{{ $t("pages.start.title") }}</span>
+        </nuxt-link>
+      </li>
+      <li class="nav__item">
+        <nuxt-link to="contact" class="nav__link">
+          <span class="nav__icon material-icons">mail</span>
+          <span class="nav__text">{{ $t("pages.contact.title") }}</span>
         </nuxt-link>
       </li>
     </ul>
@@ -15,7 +21,6 @@
 import { useUiStore } from "@/store/ui";
 
 const uiStore = useUiStore();
-
 const isNavOpen = ref(uiStore.isNavOpen);
 const isNavMini = ref(uiStore.isNavMini);
 

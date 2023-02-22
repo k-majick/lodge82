@@ -58,7 +58,7 @@
     </div>
     <div class="form__group form__group--button">
       <button ref="submitBtn" type="submit" class="main__btn" @click="sendForm">
-        {{ $t("form.registerAction") }}
+        {{ $t("form.actionRegister") }}
       </button>
     </div>
   </form>
@@ -96,32 +96,47 @@ const state = ref({
 
 const rules = {
   name: {
-    required: helpers.withMessage("Name required", required),
-    minLength: helpers.withMessage(() => "Enter min. 3 chars", minLength(3)),
-    maxLength: helpers.withMessage(() => "Enter max. 30 chars", maxLength(30)),
+    required: helpers.withMessage(t("validation.nameRequired"), required),
+    minLength: helpers.withMessage(() => t("validation.nameMin"), minLength(3)),
+    maxLength: helpers.withMessage(
+      () => t("validation.nameMax"),
+      maxLength(30),
+    ),
     alphaDiacritic: helpers.withMessage(
-      () => "Invalid name format",
+      () => t("validation.nameFormat"),
       alphaDiacritic,
     ),
   },
   username: {
-    required: helpers.withMessage("Username required", required),
-    minLength: helpers.withMessage(() => "Enter min. 3 chars", minLength(3)),
-    maxLength: helpers.withMessage(() => "Enter max. 30 chars", maxLength(30)),
+    required: helpers.withMessage(t("validation.nameFormat"), required),
+    minLength: helpers.withMessage(() => t("validation.nameMin"), minLength(3)),
+    maxLength: helpers.withMessage(
+      () => t("validation.nameMax"),
+      maxLength(30),
+    ),
     alphaDiacritic: helpers.withMessage(
-      () => "Invalid username format",
+      () => t("validation.nameFormat"),
       alphaDiacritic,
     ),
   },
   email: {
-    required: helpers.withMessage("E-mail required", required),
-    maxLength: helpers.withMessage(() => "Enter max. 50 chars", maxLength(50)),
-    email: helpers.withMessage("Enter valid e-mail", email),
+    required: helpers.withMessage(t("validation.emailRequired"), required),
+    maxLength: helpers.withMessage(
+      () => t("validation.emailMax"),
+      maxLength(50),
+    ),
+    email: helpers.withMessage(t("validation.emailInvalid"), email),
   },
   password: {
-    required: helpers.withMessage("Password required", required),
-    minLength: helpers.withMessage(() => "Enter min. 3 chars", minLength(3)),
-    maxLength: helpers.withMessage(() => "Enter max. 20 chars", maxLength(20)),
+    required: helpers.withMessage(t("validation.passwordRequired"), required),
+    minLength: helpers.withMessage(
+      () => t("validation.passwordMin"),
+      minLength(3),
+    ),
+    maxLength: helpers.withMessage(
+      () => t("validation.passwordMax"),
+      maxLength(20),
+    ),
   },
 };
 

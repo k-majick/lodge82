@@ -35,8 +35,25 @@ export const useUiStore = defineStore({
     toggleNavOpen() {
       this.navOpen = !this.navOpen;
     },
+
     toggleNavMini() {
       this.navMini = !this.navMini;
+    },
+
+    sendMessage(fd: any) {
+      try {
+        const res = fetch("/.netlify/functions/server/sendMessage", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(fd),
+        })
+          .then(res => res.json())
+          .then(data => data);
+
+        return res;
+      } catch (e) {
+        console.error(e);
+      }
     },
   },
   getters: {

@@ -19,6 +19,10 @@
     "register": {
       "title": "Register",
       "slug": "register"
+    },
+    "contact": {
+      "title": "Contact",
+      "slug": "contact"
     }
   },
   "form": {
@@ -26,20 +30,28 @@
     "username": "User name",
     "email": "E-mail",
     "password": "Password",
-    "loginAction": "Login",
-    "registerAction": "Register"
+    "message": "Message",
+    "actionLogin": "Login",
+    "actionRegister": "Register",
+    "actionSend": "Send",
+    "actionSending": "Sending"
   },
   "validation": {
-    "nameRequired": "Please enter your name",
+    "nameRequired": "Enter your name",
     "nameMin": "Name should contain at least 3 letters",
     "nameMax": "Name can't exceed 30 letters",
     "nameFormat": "Name may contain letters only",
-    "emailRequired": "Please enter your e-mail address",
+    "emailRequired": "Enter your e-mail address",
     "emailMax": "E-mail can't exceed 50 characters",
     "emailInvalid": "Invalid e-mail address",
-    "messageRequired": "Please enter your message",
+    "messageRequired": "Enter your message",
     "messageMin": "Message is too short",
     "messageMax": "Message can't exceed 1000 characters",
+    "messageSuccess": "The message has been sent",
+    "messageFail": "Error, the message has not been sent",
+    "passwordRequired": "Enter your password",
+    "passwordMin": "Password should contain at least 3 characters",
+    "passwordMax": "Password can't exceed 20 characters",
     "registerUserExists": "User exists",
     "registerEmailExists": "E-mail exists",
     "registerFail": "Failed to register new user",

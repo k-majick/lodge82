@@ -10,7 +10,7 @@
     </div>
     <div class="form__group form__group--button">
       <button ref="submitBtn" type="submit" class="main__btn">
-        {{ $t("form.loginAction") }}
+        {{ $t("form.actionLogin") }}
       </button>
     </div>
   </form>
