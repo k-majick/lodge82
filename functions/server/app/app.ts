@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== "production") {
 
 class Server {
   public app: express.Express;
-  public port: number = Number(process.env.PORT) || 7777;
+  public port = Number(process.env.PORT) || 7777;
 
   constructor() {
     this.port;
@@ -31,7 +31,6 @@ class Server {
   }
 
   public config(): void {
-    this.app.options("/*", (_, res) => res.sendStatus(200));
     this.app.use(cors());
     this.app.use(function (_, res, next) {
       res.header("Access-Control-Allow-Origin", "*");

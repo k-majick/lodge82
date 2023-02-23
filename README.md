@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# Lodge82
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/78cf8932-5715-48d5-a849-a6d05e563a3e/deploy-status)](https://app.netlify.com/sites/lodge82/deploys)
 
 ## Setup
 

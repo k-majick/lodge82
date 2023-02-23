@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { google } from "googleapis";
 import nodemailer, { TransportOptions, SentMessageInfo } from "nodemailer";
 
@@ -17,7 +17,7 @@ oauth2Client.setCredentials({
 const accessToken = oauth2Client.getAccessToken();
 
 export class FormController {
-  public sendMessage(req: Request, res: Response, next: NextFunction): any {
+  public sendMessage(req: Request, res: Response): any {
     const sendEmail = async (data: any) => {
       const transporter = nodemailer.createTransport({
         service: "gmail",

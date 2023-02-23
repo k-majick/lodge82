@@ -11,3 +11,6 @@
   for = "/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
+
+[functions]
+  external_node_modules = ["express"]
