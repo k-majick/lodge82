@@ -4,9 +4,6 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-// import http from 'http';
-// import { Server } from 'socket.io';
-// import { fileURLToPath } from 'url';
 import { UserRoutes } from "../routes/userRoutes";
 
 if (process.env.NODE_ENV !== "production") {
@@ -73,7 +70,6 @@ class Server {
       console.log("MongoDB disconnected. Trying to reconnect...");
       setTimeout(() => {
         mongoose.connect(dbUrl, {
-          // autoReconnect: true,
           keepAlive: true,
           socketTimeoutMS: 3000,
           connectTimeoutMS: 3000,
@@ -89,7 +85,6 @@ class Server {
 
     const run = async () => {
       await mongoose.connect(dbUrl, {
-        // autoReconnect: true,
         keepAlive: true,
       });
     };
