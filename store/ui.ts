@@ -1,10 +1,14 @@
 import { defineStore } from "pinia";
+import { Types } from "ably";
+import * as Ably from "ably/promises";
 
 interface IUiState {
   locale: null | string;
   flashMessage: null | string;
   navOpen: boolean;
   navMini: boolean;
+  ablyConnection: null | Types.RealtimePromise;
+  ablyChannels: Record<string, Types.RealtimeChannelPromise>;
 }
 
 export const useUiStore = defineStore({
@@ -14,6 +18,8 @@ export const useUiStore = defineStore({
     flashMessage: null,
     navOpen: true,
     navMini: true,
+    ablyConnection: null,
+    ablyChannels: {},
   }),
   actions: {
     setLocale(locale: string) {
@@ -40,9 +46,53 @@ export const useUiStore = defineStore({
       this.navMini = !this.navMini;
     },
 
-    sendMessage(fd: any) {
+    initializeAblyConnection() {
+      const optionalClientId = "optionalClientId";
+
+      this.ablyConnection = new Ably.Realtime.Promise({
+        authUrl: `/.netlify/functions//ably-token-request?clientId=${optionalClientId}`,
+      });
+    },
+
+    initializeAblyChannel(channelName: string) {
+      this.ablyChannels[channelName] = this.ablyConnection?.channels.get(
+        channelName,
+      ) as Types.RealtimeChannelPromise;
+      this.ablyChannels[channelName].subscribe((msg: Types.Message) => {
+        // dispatch action by channel
+        switch (true) {
+          case channelName === "log":
+            console.log(msg); // eslint-disable-line
+            break;
+          case channelName === "flash":
+            this.showFlashMessage(msg.data.message); // eslint-disable-line
+            break;
+        }
+      });
+    },
+
+    async sendAblyMessage(
+      channelName: string,
+      messageName: string,
+      message: string,
+    ) {
+      // if no connection initialize
+      if (!this.ablyConnection) {
+        this.initializeAblyConnection();
+      }
+
+      // if no channel channel create and subscribe
+      if (!Object.keys(this.ablyChannels).includes(channelName)) {
+        this.initializeAblyChannel(channelName);
+      }
+
+      // publish message
+      this.ablyChannels[channelName].publish(messageName, { message: message });
+    },
+
+    sendEmail(fd: any) {
       try {
-        const res = fetch("/.netlify/functions/server/sendMessage", {
+        const res = fetch("/.netlify/functions/server/sendEmail", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(fd),

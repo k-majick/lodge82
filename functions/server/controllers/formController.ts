@@ -17,7 +17,7 @@ oauth2Client.setCredentials({
 const accessToken = oauth2Client.getAccessToken();
 
 export class FormController {
-  public sendMessage(req: Request, res: Response): any {
+  public sendEmail(req: Request, res: Response): any {
     const sendEmail = async (data: any) => {
       const transporter = nodemailer.createTransport({
         service: "gmail",

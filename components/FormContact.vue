@@ -133,7 +133,7 @@ const sendForm = async () => {
     message: v$.value.message.$model,
   };
 
-  const res = await uiStore.sendMessage(fd);
+  const res = await uiStore.sendEmail(fd);
 
   uiStore.showFlashMessage(t(res.msg));
   resetForm();

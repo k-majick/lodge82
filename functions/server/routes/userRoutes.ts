@@ -25,6 +25,6 @@ export class UserRoutes {
       }),
       this.userController.getProfile,
     );
-    this.router.post("/sendMessage", this.formController.sendMessage);
+    this.router.post("/sendEmail", this.formController.sendEmail);
   }
 }
